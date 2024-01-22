@@ -1,0 +1,16 @@
+/* css home */
+.home {
+  padding: 100px 10%;
+}
+
+.search {
+  width: 100%;
+}
+
+.home_table_tab {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
+  align-items: center;
+}
+

@@ -1,38 +1,51 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Agbalumo&family=Poppins:wght@400;500;700&family=Roboto:wght@400;700&family=Titan+One&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: var(--body_background);
+  color: var(--body_color);
+  font-family: "Roboto";
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+:root {
+  --body_background_light: white;
+  --body_color_light: #000000;
+  --link_color_light: navy;
+  --body_shadow_light: 0px 20px 32px -8px rgba(0, 0, 0, 0.2);
+  --background_gradient_light: linear-gradient(to right, #71afe5, #e9dede);
+  --box_border_light: 1px solid #b6acac;
+  --placeholder_color_light: #1a1818;
+
+  --body_background_dark: #000000;
+  --body_color_dark: white;
+  --link_color_dark: cyan;
+  --body_shadow_dark: 0px 20px 32px -8px rgba(255, 255, 255, 0.821);
+  --background_gradient_dark: linear-gradient(45deg, #000000, #434747);
+  --box_border_dark: 1px solid #545252;
+  --placeholder_color_dark: #a69f9f;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+[data-theme="dark"] {
+  --body_background: var(--body_background_dark);
+  --body_color: var(--body_color_dark);
+  --link_color: var(--link_color_dark);
+  --button_shadow: var(--body_shadow_dark);
+  --background_signin: var(--background_gradient_dark);
+  --box_border: var(--box_border_dark);
+  --placeholder_color: var(--placeholder_color_dark);
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+[data-theme="light"] {
+  --body_background: var(--body_background_light);
+  --body_color: var(--body_color_light);
+  --link_color: var(--link_color_light);
+  --button_shadow: var(--body_shadow_light);
+  --background_signin: var(--background_gradient_light);
+  --box_border: var(--box_border_light);
+  --placeholder_color: var(--placeholder_color_light);
 }
