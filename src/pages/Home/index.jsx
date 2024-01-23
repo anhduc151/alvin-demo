@@ -10,10 +10,11 @@ const Home = () => {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
 
+  // call api coingecko
   useEffect(() => {
     axios
       .get(
-        // "https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=100&page=1&sparkline=false"
       )
       .then((res) => {
         setCoins(res.data);
@@ -28,6 +29,7 @@ const Home = () => {
     setSearch(e.target.value);
   };
 
+  // search coin
   const filterCoins = coins.filter((coin) =>
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -38,6 +40,8 @@ const Home = () => {
       dataIndex: "name",
       key: "name",
       render: (text, record) => <Coin name={text} image={record.image} />,
+      fixed: "left",
+      width: 50,
     },
     {
       title: "Symbol",
@@ -55,9 +59,20 @@ const Home = () => {
       key: "total_volume",
     },
     {
-      title: "1h",
+      title: "Red",
       dataIndex: "price_change_percentage_1h_in_currency",
       key: "price_change_percentage_1h_in_currency",
+      render: (priceChange) => {
+        if (priceChange !== undefined && typeof priceChange === 'number') {
+          return (
+            <span className={priceChange < 0 ? 'red' : 'green'}>
+              {priceChange.toFixed(2)}%
+            </span>
+          );
+        } else {
+          return <span className="red">N/A</span>;
+        }
+      },
     },
     {
       title: "Market Cap",
@@ -75,7 +90,7 @@ const Home = () => {
     <div className="home">
       <div className="forminput">
         <Search
-          placeholder="Tìm kiếm"
+          placeholder="Search Name Coin ..."
           className="search"
           onChange={handleChange}
         />
@@ -83,9 +98,10 @@ const Home = () => {
 
       <div className="home_table">
         <Table
-          dataSource={filterCoins}
           columns={columns}
+          dataSource={filterCoins}
           rowKey={(record) => record.id}
+          scroll={{ x: true }}
         />
       </div>
     </div>

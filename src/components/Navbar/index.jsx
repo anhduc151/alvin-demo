@@ -47,7 +47,7 @@ const Navbar = () => {
       <div className="nav_icons">
         <Link to="/" className="nav_logo">
           <img src={logo1} alt="" className="nav_logo_imgs" />
-          <p className="nav_logo_p">Alvin</p>
+          <p className="nav_logo_p">Alvin AI</p>
         </Link>
 
         <div className="nav_icon" onClick={toggleNav}>

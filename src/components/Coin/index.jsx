@@ -1,7 +1,16 @@
 import React from "react";
 import "./coin.css";
 
-function Coin({ name, image, symbol, price, volume, priceChange, marketCap, lastUpdated }) {
+function Coin({
+  name,
+  image,
+  symbol,
+  price,
+  volume,
+  priceChange,
+  marketCap,
+  lastUpdated,
+}) {
   return (
     <div className="coin">
       <div className="row">
@@ -12,21 +21,26 @@ function Coin({ name, image, symbol, price, volume, priceChange, marketCap, last
         <p className="symbol">{symbol}</p>
 
         <div className="data">
-          <p className="price">{price ? `${price} INR` : ''}</p>
-          <p className="volume">{volume ? `${volume.toLocaleString()} INR` : ''}</p>
+          <p className="price">{price ? `${price} INR` : ""}</p>
+          <p className="volume">
+            {volume ? `${volume.toLocaleString()} INR` : ""}
+          </p>
           {priceChange !== undefined ? (
             priceChange < 0 ? (
-              <p className="red">{priceChange.toFixed(2)}%</p>
+              <p className="red"> {priceChange.toFixed(2)}%</p>
             ) : (
-              <p className="green">{priceChange.toFixed(2)}%</p>
+              <p className="green"> {priceChange.toFixed(2)}%</p>
             )
           ) : (
-            <p className="red">N/A</p>
+            // <p className="red">N/A</p>
+            ""
           )}
           <p className="market-cap">
-            {marketCap !== undefined ? `$ ${marketCap.toLocaleString()} INR` : ''}
+            {marketCap !== undefined
+              ? `$ ${marketCap.toLocaleString()} INR`
+              : ""}
           </p>
-          <p className="last_updated">{lastUpdated ? lastUpdated : ''}</p>
+          <p className="last_updated">{lastUpdated ? lastUpdated : ""}</p>
         </div>
       </div>
     </div>

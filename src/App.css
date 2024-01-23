@@ -20,14 +20,22 @@ body {
   --background_gradient_light: linear-gradient(to right, #71afe5, #e9dede);
   --box_border_light: 1px solid #b6acac;
   --placeholder_color_light: #1a1818;
+  --antd_table_light: #ffffff;
+  --antd_table_color_light: #000;
+  --antd_panigation_color_light: #000;
+  --antd_panigation_bgcolor_light: rgb(165, 166, 172);
 
-  --body_background_dark: #000000;
+  --body_background_dark: #0d1217;
   --body_color_dark: white;
   --link_color_dark: cyan;
   --body_shadow_dark: 0px 20px 32px -8px rgba(255, 255, 255, 0.821);
   --background_gradient_dark: linear-gradient(45deg, #000000, #434747);
   --box_border_dark: 1px solid #545252;
   --placeholder_color_dark: #a69f9f;
+  --antd_table_dark: #0d1217;
+  --antd_table_color_dark: #ffffff;
+  --antd_panigation_color_dark: #ffffff;
+  --antd_panigation_bgcolor_dark: rgb(49, 50, 53);
 }
 
 [data-theme="dark"] {
@@ -38,6 +46,10 @@ body {
   --background_signin: var(--background_gradient_dark);
   --box_border: var(--box_border_dark);
   --placeholder_color: var(--placeholder_color_dark);
+  --antd_table: var(--antd_table_dark);
+  --antd_table_color: var(--antd_table_color_dark);
+  --antd_panigation: var(--antd_panigation_dark);
+  --antd_panigation_bgcolor: var(--antd_panigation_bgcolor_dark);
 }
 
 [data-theme="light"] {
@@ -48,4 +60,21 @@ body {
   --background_signin: var(--background_gradient_light);
   --box_border: var(--box_border_light);
   --placeholder_color: var(--placeholder_color_light);
+  --antd_table: var(--antd_table_light);
+  --antd_table_color: var(--antd_table_color_light);
+  --antd_panigation: var(--antd_panigation_light);
+  --antd_panigation_bgcolor: var(--antd_panigation_bgcolor_light);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  /* background-image: linear-gradient(0deg,#ff0076,#590fb7); */
+  background-color: #8b8a8d;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }

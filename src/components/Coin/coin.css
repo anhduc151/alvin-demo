@@ -1,25 +1,15 @@
-.coin {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  /* align-items: center; */
-}
-
 .row {
   display: flex;
   flex-direction: row;
   padding: 10px;
   justify-content: flex-start;
   align-items: center;
-  border-bottom: var(--box_border);
 }
 
 .coin_box {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   padding-right: 3rem;
-  width: 250px;
 }
 
 .coin_box h1 {
@@ -35,62 +25,60 @@
 
 .symbol {
   text-transform: uppercase;
-  width: 200px;
 }
 
-.data {
-  display: flex;
-  /* width: 700px; */
-  flex-direction: row;
-  justify-content: space-between;
-  text-align: center;
+/* antd css */
+.ant-table-cell {
+  text-align: center !important;
+  background-color: var(--antd_table) !important;
+  color: var(--antd_table_color) !important;
 }
 
-/* @media (max-width: 500px) {
-  .row {
-    flex-direction: column;
-    height: 250px;
-    align-items: center;
-    width: 100vw;
-    justify-content: center;
-  }
-
-  .coin_box {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    padding: 0px;
-  }
-
-  .coin_box h1 {
-    width: 40px;
-  }
-
-  .data {
-    flex-direction: column;
-    width: 100vw;
-    align-items: center;
-    justify-content: center;
-  }
-} */
-
-.price {
-  width: 120px;
+.ant-table-tbody > tr > td {
+  background-color: var(--antd_table);
+  color: var(--antd_table_color) !important;
 }
 
-.volume {
-  width: 170px;
+.ant-empty-description {
+  color: var(--antd_table_color) !important;
 }
 
-.market-cap {
-  width: 230px;
+.ant-table-expanded-row-fixed {
+  border-bottom: none !important;
 }
 
-.red {
-  color: red;
+/* search */
+.ant-input,
+.ant-btn-default {
+  background-color: transparent !important;
+  color: var(--antd_table_color);
 }
 
-.green {
-  color: green;
+/* search icon */
+.ant-btn-icon {
+  color: var(--body_color) !important;
+}
+
+.ant-pagination-item a {
+  color: rgb(165, 166, 172) !important;
+}
+
+.ant-pagination-item-ellipsis {
+  color: rgb(59, 60, 63) !important;
+}
+
+.anticon-right,
+.anticon-left {
+  color: rgb(59, 60, 63) !important;
+}
+
+/* muốn sửa color active ở panigation thì sửa ở đây */
+.ant-pagination-item-active.a {
+  border: none !important;
+  background-color: var(--antd_panigation_bgcolor) !important;
+}
+
+.ant-select-selector {
+  background-color: var(--antd_panigation_bgcolor) !important;
+  border: none !important;
 }
