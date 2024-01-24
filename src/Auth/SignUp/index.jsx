@@ -1,46 +1,32 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./sign-up.css";
+import React from "react";
+import { Form, Input, Button, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../client";
 import logonav from "../../assets/logo.png";
 
 const SignUp = () => {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-  });
+  const navigate = useNavigate();
 
-  console.log(formData);
-
-  function handleChange(event) {
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [event.target.name]: event.target.value,
-      };
-    });
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
+  const onFinish = async (values) => {
     try {
       const { data, error } = await supabase.auth.signUp({
-        email: formData.email,
-        password: formData.password,
+        email: values.email,
+        password: values.password,
         options: {
           data: {
-            full_name: formData.fullName,
+            full_name: values.fullName,
           },
         },
       });
+
       if (error) throw error;
-      alert("Check your email for verification link");
+      console.log(data);
+      message.success("Check your email for verification link");
+      navigate("/sign-in"); // Chuyển hướng sau khi đăng ký thành công
     } catch (error) {
-      alert(error);
+      message.error(error.message);
     }
-  }
+  };
 
   return (
     <div className="sign_in">
@@ -51,34 +37,62 @@ const SignUp = () => {
 
       <div className="sign_in_box">
         <h1 className="sign_in_box_h1">Sign Up</h1>
-        <form onSubmit={handleSubmit} className="sign_in_form">
-          <input
-            placeholder="Email"
+        <Form
+          layout="vertical"
+          name="signup"
+          onFinish={onFinish}
+          className="sign_in_form"
+        >
+          <Form.Item
+            label="Email"
             name="email"
-            className="sign_in_box_input"
-            onChange={handleChange}
-          />
+            rules={[
+              {
+                required: true,
+                message: "Please input your email!",
+              },
+            ]}
+          >
+            <Input placeholder="Email" className="sign_in_box_input" />
+          </Form.Item>
 
-          <input
-            placeholder="Fullname"
+          <Form.Item
+            label="Fullname"
             name="fullName"
-            onChange={handleChange}
-            className="sign_in_box_input"
-          />
+            rules={[
+              {
+                required: true,
+                message: "Please input your full name!",
+              },
+            ]}
+          >
+            <Input placeholder="Fullname" className="sign_in_box_input" />
+          </Form.Item>
 
-          <input
-            placeholder="Password"
+          <Form.Item
+            label="Password"
             name="password"
-            type="password"
-            className="sign_in_box_input"
-            onChange={handleChange}
-          />
+            rules={[
+              {
+                required: true,
+                message: "Please input your password!",
+              },
+            ]}
+          >
+            <Input.Password
+              placeholder="Password"
+              className="sign_in_box_input"
+            />
+          </Form.Item>
+
           <div className="sign_in_form_btn">
-            <button type="submit" className="sign_in_btn">
-              Submit
-            </button>
+            <Form.Item>
+              <Button type="primary" htmlType="submit" className="sign_in_btn">
+                Submit
+              </Button>
+            </Form.Item>
           </div>
-        </form>
+        </Form>
 
         <div className="sign_in_ques">
           <p>Already have an account?</p>

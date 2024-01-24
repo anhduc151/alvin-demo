@@ -14,12 +14,12 @@
   display: flex;
   gap: 1rem;
   flex-direction: column;
-  background-color: #000;
+  background-color: var(--box_signin);
 }
 
 .sign_in_form {
   display: flex;
-  gap: 1.4rem;
+  /* gap: 1.4rem; */
   flex-direction: column;
 }
 
@@ -56,6 +56,11 @@
   border: 2px solid #4c4848;
 }
 
+.sign_in_google:hover {
+  cursor: pointer;
+  border: 2px solid #6200ff;
+}
+
 .sign_in_google_imgs {
   width: 60px;
   height: 60px;
@@ -70,19 +75,19 @@
 }
 
 .sign_in_btn {
-  width: 100%;
-  padding: 10px;
+  /* width: 100%; */
+  /* padding: 10px; */
   background-image: linear-gradient(90deg, #d032e9, #4b11d3);
-  border-radius: 10px;
-  font-weight: bold;
+  /* border-radius: 10px; */
+  /* font-weight: bold; */
   color: #fff;
   border: none;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .sign_in_btn:hover {
   cursor: pointer;
-  background-image: linear-gradient(90deg, #ba45cc, #5827ca);
+  background-image: linear-gradient(90deg, #ba45cc, #5827ca) !important;
 }
 
 .sign_in_form_btn {
@@ -274,7 +279,15 @@
   filter: blur(12px);
 }
 
+.ant-form-item-required {
+  color: var(--body_color) !important;
+}
+
 @media screen and (max-width: 768px) {
+  .sign_in {
+    padding: 2%;
+  }
+
   .cube-loader {
     display: none;
   }

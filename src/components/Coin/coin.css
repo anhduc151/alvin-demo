@@ -56,16 +56,16 @@
 }
 
 /* search */
-.ant-input,
+/* .ant-input,
 .ant-btn-default {
   background-color: transparent !important;
   color: var(--antd_table_color);
-}
+} */
 
 /* search icon */
-.ant-btn-icon {
+/* .ant-btn-icon {
   color: var(--body_color) !important;
-}
+} */
 
 .ant-pagination-item a {
   color: rgb(165, 166, 172) !important;
