@@ -52,8 +52,8 @@
   align-items: center;
   border-radius: 10px;
   padding: 6px 20px;
-  background-color: #000000;
-  color: #c4b7b7;
+  background-color: #8044ff;
+  color: #ffffff;
   border: 1px solid #3b3b3b;
 }
 
@@ -63,5 +63,5 @@
 
 .navlanding_apps_btn:hover {
   cursor: pointer;
-  color: #ffffff;
+  background-color: #6023e6;
 }

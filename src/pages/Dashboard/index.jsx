@@ -3,12 +3,20 @@ import { Input, Table } from "antd";
 import axios from "axios";
 import Coin from "../../components/Coin";
 import "./dashboard.css";
+// import { useNavigate } from "react-router-dom";
 
-const { Search } = Input;
 
-const DashBoard = () => {
+const DashBoard = ({ token }) => {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
+  const { Search } = Input;
+
+  // let navigate = useNavigate();
+
+  // const handleLogout = () => {
+  //   sessionStorage.removeItem("token");
+  //   navigate("/");
+  // };
 
   // call api coingecko
   useEffect(() => {
@@ -39,9 +47,7 @@ const DashBoard = () => {
       title: "Coin",
       dataIndex: "name",
       key: "name",
-      render: (text, record) => (
-        <Coin name={text} image={record.image} />
-      ),
+      render: (text, record) => <Coin name={text} image={record.image} />,
       fixed: "left",
       width: 50,
     },
@@ -65,9 +71,9 @@ const DashBoard = () => {
       dataIndex: "price_change_percentage_1h_in_currency",
       key: "price_change_percentage_1h_in_currency",
       render: (priceChange) => {
-        if (priceChange !== undefined && typeof priceChange === 'number') {
+        if (priceChange !== undefined && typeof priceChange === "number") {
           return (
-            <span className={priceChange < 0 ? 'red' : 'green'}>
+            <span className={priceChange < 0 ? "red" : "green"}>
               {priceChange.toFixed(2)}%
             </span>
           );
@@ -98,9 +104,11 @@ const DashBoard = () => {
     },
   ];
 
-
   return (
     <div className="dashboard">
+      {/* <h3>Welcome back, {token.user.user_metadata.full_name}</h3> */}
+      {/* <button onClick={handleLogout}>Logout</button> */}
+
       <div className="forminput">
         <Search
           placeholder="Search Name Coin ..."
