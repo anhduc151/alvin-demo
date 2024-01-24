@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Input, Table } from "antd";
 import axios from "axios";
 import Coin from "../../components/Coin";
-import "./home.css";
+import "./dashboard.css";
 
 const { Search } = Input;
 
-const Home = () => {
+const DashBoard = () => {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -39,7 +39,9 @@ const Home = () => {
       title: "Coin",
       dataIndex: "name",
       key: "name",
-      render: (text, record) => <Coin name={text} image={record.image} />,
+      render: (text, record) => (
+        <Coin name={text} image={record.image} />
+      ),
       fixed: "left",
       width: 50,
     },
@@ -80,14 +82,25 @@ const Home = () => {
       key: "market_cap",
     },
     {
+      title: "High 24h",
+      dataIndex: "high_24h",
+      key: "high_24h",
+    },
+    {
+      title: "Low 24h",
+      dataIndex: "low_24h",
+      key: "low_24h",
+    },
+    {
       title: "Last Updated",
       dataIndex: "last_updated",
       key: "last_updated",
     },
   ];
 
+
   return (
-    <div className="home">
+    <div className="dashboard">
       <div className="forminput">
         <Search
           placeholder="Search Name Coin ..."
@@ -96,7 +109,7 @@ const Home = () => {
         />
       </div>
 
-      <div className="home_table">
+      <div className="dashboard_table">
         <Table
           columns={columns}
           dataSource={filterCoins}
@@ -108,4 +121,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default DashBoard;

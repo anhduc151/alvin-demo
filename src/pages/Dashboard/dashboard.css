@@ -1,5 +1,5 @@
-/* css home */
-.home {
+/* css dashboard */
+.dashboard {
   padding: 100px 10%;
 }
 
@@ -7,10 +7,15 @@
   width: 100%;
 }
 
-.home_table_tab {
+/* .home_table_tab {
   display: flex;
   justify-content: space-evenly;
   gap: 10px;
   align-items: center;
-}
+} */
 
+@media screen and (max-width: 768px) {
+  .dashboard {
+    padding:1%;
+  }
+}

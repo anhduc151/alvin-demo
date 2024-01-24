@@ -27,6 +27,14 @@
   text-transform: uppercase;
 }
 
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
 /* antd css */
 .ant-table-cell {
   text-align: center !important;

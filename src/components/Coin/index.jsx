@@ -1,16 +1,8 @@
 import React from "react";
 import "./coin.css";
 
-function Coin({
-  name,
-  image,
-  symbol,
-  price,
-  volume,
-  priceChange,
-  marketCap,
-  lastUpdated,
-}) {
+function Coin({ name, image, symbol, price, volume, priceChange, marketCap, lastUpdated, high24h, low24h, }) {
+
   return (
     <div className="coin">
       <div className="row">
@@ -32,7 +24,7 @@ function Coin({
               <p className="green"> {priceChange.toFixed(2)}%</p>
             )
           ) : (
-            // <p className="red">N/A</p>
+            // <span className="red">N/A</span>
             ""
           )}
           <p className="market-cap">
@@ -40,6 +32,8 @@ function Coin({
               ? `$ ${marketCap.toLocaleString()} INR`
               : ""}
           </p>
+          <p className="high_24h red">{high24h}</p>
+          <p className="low_24h green">{low24h}</p>
           <p className="last_updated">{lastUpdated ? lastUpdated : ""}</p>
         </div>
       </div>
