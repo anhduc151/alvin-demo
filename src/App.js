@@ -9,6 +9,13 @@ import DashBoard from "./pages/Dashboard";
 function App() {
   const [token, setToken] = useState(false);
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (!savedTheme) {
+      localStorage.setItem("theme", "dark");
+    }
+  }, []);
+
   if (token) {
     sessionStorage.setItem("token", JSON.stringify(token));
   }
