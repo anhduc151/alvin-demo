@@ -34,7 +34,6 @@ const SignIn = ({ setToken }) => {
       setLoading(true);
       const { user, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
-        // redirectURL: "http://localhost:3000/dashboard",
       });
   
       if (error) {

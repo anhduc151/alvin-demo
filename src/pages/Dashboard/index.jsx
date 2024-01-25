@@ -5,7 +5,6 @@ import Coin from "../../components/Coin";
 import "./dashboard.css";
 // import { useNavigate } from "react-router-dom";
 
-
 const DashBoard = ({ token }) => {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
@@ -61,26 +60,30 @@ const DashBoard = ({ token }) => {
       dataIndex: "current_price",
       key: "current_price",
     },
+    // {
+    //   title: "Volume",
+    //   dataIndex: "total_volume",
+    //   key: "total_volume",
+    // },
     {
-      title: "Volume",
-      dataIndex: "total_volume",
-      key: "total_volume",
+      title: "24h",
+      dataIndex: "price_change_24h",
+      key: "price_change_24h",
+      render: (priceChange24h) => (
+        <span className={priceChange24h < 0 ? "red" : "green"}>
+          {priceChange24h.toFixed(2)}%
+        </span>
+      ),
     },
     {
-      title: "Red",
-      dataIndex: "price_change_percentage_1h_in_currency",
-      key: "price_change_percentage_1h_in_currency",
-      render: (priceChange) => {
-        if (priceChange !== undefined && typeof priceChange === "number") {
-          return (
-            <span className={priceChange < 0 ? "red" : "green"}>
-              {priceChange.toFixed(2)}%
-            </span>
-          );
-        } else {
-          return <span className="red">N/A</span>;
-        }
-      },
+      title: "24h %",
+      dataIndex: "price_change_percentage_24h",
+      key: "price_change_percentage_24h",
+      render: (priceChangePercentage24h) => (
+        <span className={priceChangePercentage24h < 0 ? "red" : "green"}>
+          {priceChangePercentage24h.toFixed(2)}%
+        </span>
+      ),
     },
     {
       title: "Market Cap",

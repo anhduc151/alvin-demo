@@ -6,7 +6,8 @@ import "./dark_mode.css";
 function DarkMode() {
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
-    return savedTheme ? savedTheme : "light";
+    // return savedTheme ? savedTheme : "dark";
+    return savedTheme || "dark";
   });
 
   const setDarkMode = () => {

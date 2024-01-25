@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Agbalumo&family=Poppins:wght@400;500;700&family=Roboto:wght@400;700&family=Titan+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 * {
   margin: 0;
@@ -13,6 +13,19 @@ body {
 }
 
 :root {
+  --body_background_dark: rgb(17, 17, 17);
+  --body_color_dark: white;
+  --link_color_dark: cyan;
+  --body_shadow_dark: 0px 20px 32px -8px rgba(255, 255, 255, 0.821);
+  --background_gradient_dark: linear-gradient(45deg, #000000, #434747);
+  --box_border_dark: 1px solid #545252;
+  --placeholder_color_dark: #a69f9f;
+  --antd_table_dark: rgb(17, 17, 17);
+  --antd_table_color_dark: #ffffff;
+  --antd_panigation_color_dark: #ffffff;
+  --antd_panigation_bgcolor_dark: rgb(49, 50, 53);
+  --box_signin_dark: #000;
+
   --body_background_light: white;
   --body_color_light: #000000;
   --link_color_light: navy;
@@ -25,19 +38,6 @@ body {
   --antd_panigation_color_light: #000;
   --antd_panigation_bgcolor_light: rgb(165, 166, 172);
   --box_signin_light: #fff;
-
-  --body_background_dark: #0d1217;
-  --body_color_dark: white;
-  --link_color_dark: cyan;
-  --body_shadow_dark: 0px 20px 32px -8px rgba(255, 255, 255, 0.821);
-  --background_gradient_dark: linear-gradient(45deg, #000000, #434747);
-  --box_border_dark: 1px solid #545252;
-  --placeholder_color_dark: #a69f9f;
-  --antd_table_dark: #0d1217;
-  --antd_table_color_dark: #ffffff;
-  --antd_panigation_color_dark: #ffffff;
-  --antd_panigation_bgcolor_dark: rgb(49, 50, 53);
-  --box_signin_dark: #000;
 }
 
 [data-theme="dark"] {
@@ -68,7 +68,6 @@ body {
   --antd_panigation: var(--antd_panigation_light);
   --antd_panigation_bgcolor: var(--antd_panigation_bgcolor_light);
   --box_signin: var(--box_signin_light);
-
 }
 
 ::-webkit-scrollbar {

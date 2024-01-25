@@ -3,12 +3,13 @@
   display: flex;
   align-items: center;
   padding: 25px;
+  background-color: #000;
   margin: 20px 20px 0 20px;
-  border: 1px solid #fff;
-  position: fixed;
   width: 98%;
-  border-radius: 20px;
   border: 1px solid #3d3b3b;
+  border-radius: 20px;
+  position: fixed;
+  z-index: 9999;
 }
 
 .navlanding_imgs {

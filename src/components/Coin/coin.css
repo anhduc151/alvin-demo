@@ -1,6 +1,7 @@
 .row {
   display: flex;
   flex-direction: row;
+  width: 250px;
   padding: 10px;
   justify-content: flex-start;
   align-items: center;
@@ -89,4 +90,16 @@
 .ant-select-selector {
   background-color: var(--antd_panigation_bgcolor) !important;
   border: none !important;
+}
+
+.ant-table-tbody >tr >td {
+  border: none !important;
+}
+
+.ant-table-thead >tr>td {
+  border: none !important;
+}
+
+@media screen and (max-width: 768px) {
+  
 }
