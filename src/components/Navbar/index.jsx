@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./navbar.css";
 import logo1 from "../../assets/logo.png";
+import DarkMode from "../DarkMode";
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -9,9 +10,14 @@ const Navbar = () => {
   const [activePage, setActivePage] = useState("");
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [previousScroll, setPreviousScroll] = useState(0);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   const handleScroll = () => {
@@ -70,6 +76,7 @@ const Navbar = () => {
             Cryptocurrencies
           </li>
         </Link>
+
         <Link to="/blog-list" className="decoration">
           {" "}
           <li
@@ -112,6 +119,17 @@ const Navbar = () => {
           </li>
         </Link>
       </ul>
+
+      {/* <div className="nav_dropdown" onClick={toggleDropdown}>
+        <span>Dropdown</span>
+        {isDropdownOpen && (
+          <ul className="dropdown_content">
+            <li>Dropdown Item 1</li>
+            <li>Dropdown Item 2</li>
+            <DarkMode />
+          </ul>
+        )}
+      </div> */}
     </nav>
   );
 };

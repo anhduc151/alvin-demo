@@ -1,8 +1,7 @@
 /* css home  */
 .home {
-  height: 1000px;
+  height: 100%;
 }
-
 /* css animation home */
 .circle {
   width: 460px;
@@ -184,8 +183,129 @@
   }
 }
 
+/* css home_questions */
+.home_questions {
+  display: flex;
+  height: 100vh;
+  padding-top: 40px;
+  /* gap: 20px; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.home_questions_h1 {
+  font-size: 40px;
+  width: 800px;
+  font-weight: 400;
+  font-family: "Merriweather", serif;
+  text-align: center;
+  background: linear-gradient(180deg, #ffffff 8.91%, #555555 95.46%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* css animation questions */
+.obj {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  /* background-color: rgb(96, 96, 232); */
+  transform-style: preserve-3d;
+  transition: 0.5s all;
+  transform: rotateX(-25deg) rotateY(20deg);
+}
+
+.objchild {
+  animation: rotate 10s infinite linear;
+  transform-style: preserve-3d;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* background:linear-gradient( to top,rgb(11, 11, 102),rgb(96, 96, 232) ) ; */
+}
+
+.objchild::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* background: rgb(37, 101, 230); */
+  /* background: radial-gradient(center center, farthest-side , #9993, transparent); */
+  filter: blur(20px);
+  box-shadow: 0 0 200px 15px white;
+  transform: rotateX(90deg) scale(1.1) translateZ(-120px);
+}
+
+.inn6 {
+  position: absolute;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  background: rgb(21, 21, 21);
+  transform: rotateX(90deg) translateZ(100px);
+  animation: updown 4s infinite ease-in-out;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate3d(0, 1, 0, 0deg);
+  }
+
+  100% {
+    transform: rotate3d(0, 1, 0, 360deg);
+  }
+}
+
+@keyframes updown {
+  0% {
+    transform: translateY(100px) rotateX(90deg) translateZ(100px);
+  }
+
+  50% {
+    transform: translateY(200px) rotateX(90deg) translateZ(100px);
+  }
+
+  100% {
+    transform: translateY(100px) rotateX(90deg) translateZ(100px);
+  }
+}
+
 @media screen and (max-width: 768px) {
   .home_logo_icons_imgs {
     display: none;
+  }
+
+  .circle {
+    width: 280px;
+    height: 280px;
+  }
+
+  .home_title_h1 {
+    width: 100%;
+    font-size: 22px;
+  }
+
+  .home_circle {
+    padding: 100px 2%;
+  }
+
+  .home_title_p {
+    width: 100%;
+    font-size: 16px;
+    padding: 0;
+    line-height: 22px;
+  }
+
+  .home_questions {
+    padding: 0 5%;
+    padding-top: 0px;
+  }
+
+  .home_questions_h1 {
+    width: 100%;
+    font-size: 20px;
   }
 }

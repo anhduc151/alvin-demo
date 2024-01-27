@@ -92,14 +92,21 @@
   border: none !important;
 }
 
-.ant-table-tbody >tr >td {
+.ant-table-tbody > tr > td {
   border: none !important;
 }
 
-.ant-table-thead >tr>td {
+.ant-table-thead > tr > td {
   border: none !important;
+}
+
+.ant-table-container table > thead > tr:first-child > *:first-child {
+  border-start-start-radius: 0px !important;
+}
+
+.ant-table-wrapper .ant-table-container table > thead > tr:first-child > *:last-child {
+  border-start-end-radius: 0px !important;
 }
 
 @media screen and (max-width: 768px) {
-  
 }

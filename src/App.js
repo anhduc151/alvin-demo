@@ -9,6 +9,8 @@ import DashBoard from "./pages/Dashboard";
 function App() {
   const [token, setToken] = useState(false);
 
+
+  // default dark mode 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (!savedTheme) {

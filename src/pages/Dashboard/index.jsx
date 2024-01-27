@@ -8,6 +8,8 @@ import "./dashboard.css";
 const DashBoard = ({ token }) => {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
+  const [latestCoins, setLatestCoins] = useState([]);
+  const [highVolumeCoins, setHighVolumeCoins] = useState([]);
   const { Search } = Input;
 
   // let navigate = useNavigate();
@@ -31,6 +33,24 @@ const DashBoard = ({ token }) => {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    // Lấy 3 đồng coin mới nhất
+    const sortedCoins = [...coins].sort(
+      (a, b) => b.last_updated - a.last_updated
+    );
+    const latestThreeCoins = sortedCoins.slice(0, 3);
+    setLatestCoins(latestThreeCoins);
+  }, [coins]);
+
+  useEffect(() => {
+    // Lấy 3 đồng coin có giao dịch nhiều nhất
+    const sortedCoins = [...coins].sort(
+      (a, b) => b.total_volume - a.total_volume
+    );
+    const highVolumeThreeCoins = sortedCoins.slice(0, 3);
+    setHighVolumeCoins(highVolumeThreeCoins);
+  }, [coins]);
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -107,17 +127,70 @@ const DashBoard = ({ token }) => {
     },
   ];
 
+  const selectedCoins = filterCoins.slice(0, 3);
+
   return (
     <div className="dashboard">
       {/* <h3>Welcome back, {token.user.user_metadata.full_name}</h3> */}
       {/* <button onClick={handleLogout}>Logout</button> */}
 
-      <div className="forminput">
+      {/* <div className="forminput">
         <Search
           placeholder="Search Name Coin ..."
           className="search"
           onChange={handleChange}
         />
+      </div> */}
+
+      <div className="dashboard_overview">
+        <h2 className="dashboard_overview_h2">Markets Overview</h2>
+        <div className="dashboard_overview_trending">
+          <div className="dashboard_overview_box">
+            <p className="dashboard_overview_box_p">Hot Coins</p>
+            {selectedCoins.map((coin) => (
+              <div key={coin.id} className="coin_info_box">
+                <Coin name={coin.name} image={coin.image} />
+                <p className={coin.price_change_24h < 0 ? "red" : "green"}>
+                  {coin.current_price}
+                </p>
+                <p className={coin.price_change_24h < 0 ? "red" : "green"}>
+                  {coin.price_change_24h.toFixed(2)}%
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="dashboard_overview_box">
+            <p className="dashboard_overview_box_p">Top Gainer Coin</p>
+            {latestCoins.map((coin) => (
+              <div key={coin.id} className="coin_info_box">
+                <Coin name={coin.name} image={coin.image} />
+                <p className={coin.price_change_24h < 0 ? "red" : "green"}>
+                  {coin.current_price}
+                </p>
+                <p className={coin.price_change_24h < 0 ? "red" : "green"}>
+                  {coin.price_change_24h.toFixed(2)}%
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="dashboard_overview_box">
+            <p className="dashboard_overview_box_p">Top Volume Coin</p>
+            {highVolumeCoins.map((coin) => (
+              <div key={coin.id} className="coin_info_box">
+                <Coin name={coin.name} image={coin.image} />
+                <p className={coin.price_change_24h < 0 ? "red" : "green"}>
+                  {coin.current_price}
+                </p>
+                <p className={coin.price_change_24h < 0 ? "red" : "green"}>
+                  {coin.price_change_24h.toFixed(2)}%
+                </p>
+                {/* <p>{coin.total_volume}</p> */}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="dashboard_table">

@@ -9,6 +9,7 @@ import smart from "../../../assets/SMART.png";
 import tch from "../../../assets/TCH.png";
 import tnc from "../../../assets/TNC.png";
 import xbc from "../../../assets/XBC.png";
+import FootLanDing from "../../../components/FootLanDing";
 
 const Home = () => {
   return (
@@ -38,6 +39,23 @@ const Home = () => {
         </div>
         <div className="circle"></div>
       </div>
+
+      <div className="home_questions">
+        <div className="home_title">
+          <h1 className="home_questions_h1">
+            Quests give you ownership of crypto projects as you transact
+          </h1>
+        </div>
+
+        <div className="bg-black py-5 d-flex justify-content-center align-items-center">
+          <div className="obj">
+            <div className="objchild">
+              <span className="inn6">Questions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <FootLanDing />
     </div>
   );
 };
