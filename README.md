@@ -1,3 +1,4 @@
+![Screenshot_2024-01-23_105014-removebg-preview](https://github.com/crypto-beat/alvin/assets/85023526/b09ef757-e014-4787-ab2a-b4c1cb44b408)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
