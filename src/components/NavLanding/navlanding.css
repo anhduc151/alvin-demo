@@ -9,7 +9,7 @@
   border: 1px solid #3d3b3b;
   border-radius: 20px;
   position: fixed;
-  z-index: 9999;
+  z-index: 999;
 }
 
 .navlanding_imgs {
@@ -66,3 +66,9 @@
   cursor: pointer;
   background-color: #6023e6;
 }
+
+.ant-message-notice-wrapper {
+  z-index: 9999 !important;
+}
+
+

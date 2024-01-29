@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./navbar.css";
 import logo1 from "../../assets/logo.png";
 import DarkMode from "../DarkMode";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../../client";
+import { message } from "antd";
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -11,6 +14,11 @@ const Navbar = () => {
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [previousScroll, setPreviousScroll] = useState(0);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navRef = useRef(null);
+
+  const closeNav = () => {
+    setIsNavOpen(false);
+  };
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -37,43 +45,88 @@ const Navbar = () => {
     setPreviousScroll(window.scrollY);
   }, []);
 
-  // useEffect(() => {
-  //   const pathname = location.pathname;
-  //   setActivePage(pathname);
+  useEffect(() => {
+    const pathname = location.pathname;
+    setActivePage(pathname);
 
-  //   window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [location, isNavVisible, previousScroll]);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [location, isNavVisible, previousScroll]);
+
+  // handle logout
+  let navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (!error) {
+        // sessionStorage.removeItem("token");
+        message.success("Logout successfully");
+        navigate("/");
+      } else {
+        console.error("Error when logging out:", error.message);
+      }
+    } catch (error) {
+      message.error("");
+      console.error("Error when logging out:", error.message);
+    }
+  };
+
+  useEffect(() => {
+    const handleBodyClick = (event) => {
+      // Kiểm tra xem click không phải là trong dropdown và không phải là nút mở dropdown
+      if (
+        !event.target.closest(".nav_dropdown") &&
+        !event.target.closest(".dropdown_list")
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    // Thêm lắng nghe sự kiện click cho body
+    document.body.addEventListener("click", handleBodyClick);
+
+    return () => {
+      // Loại bỏ lắng nghe sự kiện khi component unmount
+      document.body.removeEventListener("click", handleBodyClick);
+    };
+  }, []);
 
   return (
     <nav className={`nav ${isNavVisible ? "nav_visible" : "nav_hidden"}`}>
       <div className="nav_icons">
-        <Link to="/" className="nav_logo">
+        <Link to="/dashboard" className="nav_logo">
           <img src={logo1} alt="" className="nav_logo_imgs" />
           <p className="nav_logo_p">Alvin AI</p>
         </Link>
 
-        <div className="nav_icon" onClick={toggleNav}>
-          {isNavOpen ? (
-            <i className="bx bx-x"></i>
-          ) : (
-            <i className="bx bx-menu"></i>
-          )}
+        <div className="nav_icon">
+          <input
+            type="checkbox"
+            id="checkbox"
+            checked={isNavOpen}
+            onChange={toggleNav}
+          />
+          <label htmlFor="checkbox" className="toggle">
+            <div className="bars" id="bar1"></div>
+            <div className="bars" id="bar2"></div>
+            <div className="bars" id="bar3"></div>
+          </label>
         </div>
       </div>
 
       <ul className={`nav_links ${isNavOpen ? "nav_links_open" : ""}`}>
-        <Link to="/create" className="decoration">
+        <Link to="/dashboard" className="decoration">
           {" "}
           <li
             className={`nav_links_li ${
-              activePage === "/create" ? "active" : ""
+              activePage === "/dashboard" ? "active" : ""
             }`}
           >
-            Cryptocurrencies
+            Dashboard
           </li>
         </Link>
 
@@ -108,28 +161,34 @@ const Navbar = () => {
           </li>
         </Link>
 
-        <Link to="/create" className="decoration">
+        <Link to="/blog" className="decoration">
           {" "}
           <li
-            className={`nav_links_li ${
-              activePage === "/create" ? "active" : ""
-            }`}
+            className={`nav_links_li ${activePage === "/blog" ? "active" : ""}`}
           >
-            Products
+            Blog
           </li>
         </Link>
-      </ul>
 
-      {/* <div className="nav_dropdown" onClick={toggleDropdown}>
-        <span>Dropdown</span>
-        {isDropdownOpen && (
-          <ul className="dropdown_content">
-            <li>Dropdown Item 1</li>
-            <li>Dropdown Item 2</li>
-            <DarkMode />
-          </ul>
-        )}
-      </div> */}
+        <div className="nav_dropdown" onClick={toggleDropdown}>
+          <span>
+            <i className="bx bx-user-circle icons_user"></i>
+          </span>
+          {isDropdownOpen && (
+            <div className="dropdown_list">
+              <p className="dropdown_list_p">
+                <i className="bx bxs-user icons_dropdown"></i> Profile
+              </p>
+              <p className="dropdown_list_p">
+                <i className="bx bx-cog icons_dropdown"></i> Setting
+              </p>
+              <p className="dropdown_list_p" onClick={handleLogout}>
+                <i className="bx bx-log-out icons_dropdown"></i> Logout
+              </p>
+            </div>
+          )}
+        </div>
+      </ul>
     </nav>
   );
 };

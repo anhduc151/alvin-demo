@@ -1,8 +1,8 @@
 .row {
   display: flex;
   flex-direction: row;
-  width: 250px;
-  padding: 10px;
+  /* width: 250px; */
+  padding: 10px 0;
   justify-content: flex-start;
   align-items: center;
 }
@@ -13,11 +13,14 @@
   padding-right: 3rem;
 }
 
-.coin_box h1 {
+.coinbox_h1 {
   font-size: 16px;
+  width: 160px;
+  display: flex;
+  align-items: flex-start;
 }
 
-.coin_box img {
+.coin_box_imgs {
   height: 30px;
   width: 30px;
   object-fit: cover;
@@ -104,9 +107,38 @@
   border-start-start-radius: 0px !important;
 }
 
-.ant-table-wrapper .ant-table-container table > thead > tr:first-child > *:last-child {
+.ant-table-wrapper
+  .ant-table-container
+  table
+  > thead
+  > tr:first-child
+  > *:last-child {
   border-start-end-radius: 0px !important;
 }
 
+.ant-table-wrapper .ant-table-thead > tr > th {
+  border-bottom: 1px solid #4e4e4e !important;
+}
+
+.ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > th:not(:last-child):not(.ant-table-selection-column):not(
+    .ant-table-row-expand-icon-cell
+  ):not([colspan])::before,
+:where(.css-dev-only-do-not-override-1qhpsh8).ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > td:not(:last-child):not(.ant-table-selection-column):not(
+    .ant-table-row-expand-icon-cell
+  ):not([colspan])::before {
+  position: static;
+}
+
 @media screen and (max-width: 768px) {
+  .coinbox_h1 {
+    width: 140px;
+    display: flex;
+    align-items: flex-start;
+  }
 }

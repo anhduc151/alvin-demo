@@ -16,10 +16,10 @@ function Coin({
   return (
     <div className="coin">
       <div className="row">
-        <div className="coin_box">
-          <img src={image} alt={name} />
-          <h1>{name}</h1>
-        </div>
+        {/* <div className="coin_box"> */}
+          <img src={image} alt={name} className="coin_box_imgs"/>
+          <h1 className="coinbox_h1">{name}</h1>
+        {/* </div> */}
         <p className="symbol">{symbol}</p>
         <p className="price">{price ? `${price} INR` : ""}</p>
         {/* <p className="volume">

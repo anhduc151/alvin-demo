@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Input, Table } from "antd";
+import { Input, Table, Spin, message } from "antd";
 import axios from "axios";
 import Coin from "../../components/Coin";
 import "./dashboard.css";
-// import { useNavigate } from "react-router-dom";
 
 const DashBoard = ({ token }) => {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
   const [latestCoins, setLatestCoins] = useState([]);
   const [highVolumeCoins, setHighVolumeCoins] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { Search } = Input;
 
   // let navigate = useNavigate();
@@ -18,6 +18,8 @@ const DashBoard = ({ token }) => {
   //   sessionStorage.removeItem("token");
   //   navigate("/");
   // };
+
+  
 
   // call api coingecko
   useEffect(() => {
@@ -60,6 +62,8 @@ const DashBoard = ({ token }) => {
   const filterCoins = coins.filter((coin) =>
     coin.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  const selectedCoins = filterCoins.slice(0, 3);
 
   const columns = [
     {
@@ -127,12 +131,138 @@ const DashBoard = ({ token }) => {
     },
   ];
 
-  const selectedCoins = filterCoins.slice(0, 3);
+  useEffect(() => {
+    if (coins.length > 0) {
+      // hidden loader
+      setLoading(false);
+    }
+  }, [coins]);
 
   return (
     <div className="dashboard">
       {/* <h3>Welcome back, {token.user.user_metadata.full_name}</h3> */}
       {/* <button onClick={handleLogout}>Logout</button> */}
+
+      <div className="dashboard_overview">
+        <h2 className="dashboard_overview_h2">Markets Overview</h2>
+        <div className="dashboard_overview_trending">
+          <div className="dashboard_overview_box">
+            <p className="dashboard_overview_box_p">🔥Hot Coins</p>
+            {loading ? (
+              <div className="loading_circle">
+                <div className="ui-loader loader-blk">
+                  <svg viewBox="22 22 44 44" className="multiColor-loader">
+                    <circle
+                      cx="44"
+                      cy="44"
+                      r="20.2"
+                      fill="none"
+                      strokeWidth="3.6"
+                      className="loader-circle loader-circle-animation"
+                    ></circle>
+                  </svg>
+                </div>
+              </div>
+            ) : (
+              <>
+                {selectedCoins.map((coin) => (
+                  <div key={coin.id} className="coin_info_box">
+                    <Coin name={coin.name} image={coin.image} />
+                    <p className={coin.price_change_24h < 0 ? "red" : "green"}>
+                      {coin.current_price}
+                    </p>
+                    <p className={coin.price_change_24h < 0 ? "red" : "green"}>
+                      {coin.price_change_24h.toFixed(2)}%
+                    </p>
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+
+          <div className="dashboard_overview_box">
+            <p className="dashboard_overview_box_p">🚀Top Gainer Coin</p>
+            {loading ? (
+              <div className="loading_circle">
+                <div className="ui-loader loader-blk">
+                  <svg viewBox="22 22 44 44" className="multiColor-loader">
+                    <circle
+                      cx="44"
+                      cy="44"
+                      r="20.2"
+                      fill="none"
+                      strokeWidth="3.6"
+                      className="loader-circle loader-circle-animation"
+                    ></circle>
+                  </svg>
+                </div>
+              </div>
+            ) : (
+              <>
+                {latestCoins.map((coin) => (
+                  <div key={coin.id} className="coin_info_box">
+                    <Coin name={coin.name} image={coin.image} />
+                    <p className={coin.price_change_24h < 0 ? "red" : "green"}>
+                      {coin.current_price}
+                    </p>
+                    <p className={coin.price_change_24h < 0 ? "red" : "green"}>
+                      {coin.price_change_24h.toFixed(2)}%
+                    </p>
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+
+          <div className="dashboard_overview_box">
+            <p className="dashboard_overview_box_p">🔈Top Volume Coin</p>
+            {loading ? (
+              <div className="loading_circle">
+                <div className="ui-loader loader-blk">
+                  <svg viewBox="22 22 44 44" className="multiColor-loader">
+                    <circle
+                      cx="44"
+                      cy="44"
+                      r="20.2"
+                      fill="none"
+                      strokeWidth="3.6"
+                      className="loader-circle loader-circle-animation"
+                    ></circle>
+                  </svg>
+                </div>
+              </div>
+            ) : (
+              <>
+                {highVolumeCoins.map((coin) => (
+                  <div key={coin.id} className="coin_info_box">
+                    <Coin name={coin.name} image={coin.image} />
+                    <p className={coin.price_change_24h < 0 ? "red" : "green"}>
+                      {coin.current_price}
+                    </p>
+                    <p className={coin.price_change_24h < 0 ? "red" : "green"}>
+                      {coin.price_change_24h.toFixed(2)}%
+                    </p>
+                    {/* <p>{coin.total_volume}</p> */}
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* <Spin
+        spinning={loading}
+        indicator={<div className="loader"></div>}
+        className="dashboard_table"
+      >
+        <Table
+          columns={columns}
+          dataSource={filterCoins}
+          rowKey={(record) => record.id}
+          scroll={{ x: true }}
+        />
+      </Spin> */}
 
       {/* <div className="forminput">
         <Search
@@ -142,63 +272,13 @@ const DashBoard = ({ token }) => {
         />
       </div> */}
 
-      <div className="dashboard_overview">
-        <h2 className="dashboard_overview_h2">Markets Overview</h2>
-        <div className="dashboard_overview_trending">
-          <div className="dashboard_overview_box">
-            <p className="dashboard_overview_box_p">Hot Coins</p>
-            {selectedCoins.map((coin) => (
-              <div key={coin.id} className="coin_info_box">
-                <Coin name={coin.name} image={coin.image} />
-                <p className={coin.price_change_24h < 0 ? "red" : "green"}>
-                  {coin.current_price}
-                </p>
-                <p className={coin.price_change_24h < 0 ? "red" : "green"}>
-                  {coin.price_change_24h.toFixed(2)}%
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="dashboard_overview_box">
-            <p className="dashboard_overview_box_p">Top Gainer Coin</p>
-            {latestCoins.map((coin) => (
-              <div key={coin.id} className="coin_info_box">
-                <Coin name={coin.name} image={coin.image} />
-                <p className={coin.price_change_24h < 0 ? "red" : "green"}>
-                  {coin.current_price}
-                </p>
-                <p className={coin.price_change_24h < 0 ? "red" : "green"}>
-                  {coin.price_change_24h.toFixed(2)}%
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="dashboard_overview_box">
-            <p className="dashboard_overview_box_p">Top Volume Coin</p>
-            {highVolumeCoins.map((coin) => (
-              <div key={coin.id} className="coin_info_box">
-                <Coin name={coin.name} image={coin.image} />
-                <p className={coin.price_change_24h < 0 ? "red" : "green"}>
-                  {coin.current_price}
-                </p>
-                <p className={coin.price_change_24h < 0 ? "red" : "green"}>
-                  {coin.price_change_24h.toFixed(2)}%
-                </p>
-                {/* <p>{coin.total_volume}</p> */}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
       <div className="dashboard_table">
         <Table
           columns={columns}
           dataSource={filterCoins}
           rowKey={(record) => record.id}
           scroll={{ x: true }}
+          // loading={loading}
         />
       </div>
     </div>
