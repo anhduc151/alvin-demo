@@ -33,11 +33,11 @@ function App() {
       <div>
         <DarkMode />
         <Routes>
-          {token ? (
+          {/* {token ? (
             <Route path={"/dashboard"} element={<DashBoard token={token} />} />
           ) : (
             ""
-          )}
+          )} */}
 
           {publicRoutes.map((route, index) => {
             const Page = route.component;

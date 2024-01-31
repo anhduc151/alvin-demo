@@ -132,8 +132,8 @@ const SignIn = ({ setToken }) => {
         </div>
 
         <div className="sign_in_otp">
-          <input type="text" placeholder="Enter Email Address"/>
-          <button>Continue</button>
+          <p>If you want to login by OTP</p>
+          <Link to="/sign-in-otp">Click Here</Link>
         </div>
       </div>
 

@@ -1,41 +1,46 @@
-import React, { useState } from "react";
-import { message, Input, Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { supabase } from "../../client";
-import "./verify.css";
+import { message } from "antd";
 
 const VerifyEmail = () => {
+  const { email } = useParams();
   const navigate = useNavigate();
-  const [otp, setOtp] = useState("");
+  const location = useLocation();
 
-  const handleVerifyOTP = async () => {
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const token = searchParams.get("token");
+
+    if (token) {
+      verifyOTP(token);
+    }
+  }, [location.search]);
+
+  const verifyOTP = async (token) => {
     try {
       const { data, error } = await supabase.auth.verifyOtp({
-        otp,
+        token_hash: token,
+        type: "email",
       });
+
+      console.log("Verify OTP Data:", data);
+      console.log("Verify OTP Error:", error);
 
       if (error) {
         throw error;
       }
 
-      message.success("OTP verified successfully!");
       navigate("/dashboard");
+      console.log("OTP verified successfully");
     } catch (error) {
-      message.error("Error verifying OTP: " + error.message);
+      console.error("Error verifying OTP:", error.message);
     }
   };
 
   return (
     <div>
-      <p>Enter the OTP sent to your email:</p>
-      <Input
-        placeholder="OTP"
-        value={otp}
-        onChange={(e) => setOtp(e.target.value)}
-      />
-      <Button type="primary" onClick={handleVerifyOTP}>
-        Verify OTP
-      </Button>
+      <p>Verifying email...</p>
     </div>
   );
 };

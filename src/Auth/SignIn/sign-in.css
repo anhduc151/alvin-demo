@@ -283,6 +283,13 @@
   color: var(--body_color) !important;
 }
 
+.sign_in_otp {
+  display: flex;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
 @media screen and (max-width: 768px) {
   .sign_in {
     padding: 2%;

@@ -1,6 +1,9 @@
+import ChangePass from "./Auth/ChangePass";
 import ForgotPassword from "./Auth/ForgotPass";
 import SignIn from "./Auth/SignIn";
+import SignInOTP from "./Auth/SignIn/OTP";
 import SignUp from "./Auth/SignUp";
+import VerifyEmail from "./Auth/Verify";
 import CoinDetails from "./components/CoinDetails";
 import Blog from "./pages/Blog";
 import DetailsBlog from "./pages/Blog/DetailsBlog";
@@ -16,6 +19,9 @@ const publicRoutes = [
   { path: "/blog", component: Blog },
   { path: "/blog/:id", component: DetailsBlog },
   { path: "/forgot-password", component: ForgotPassword, layout: null },
+  { path: "/verify-email/:email", component: VerifyEmail, layout: null },
+  { path: "/sign-in-otp", component: SignInOTP, layout: null },
+  { path: "/changepass", component: ChangePass, layout: null },
 ];
 
 const privateRoutes = [];

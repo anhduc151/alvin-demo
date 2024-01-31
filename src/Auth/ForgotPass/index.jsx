@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
-import "./forgot.css";
-import { Form, Input, Button, message } from "antd";
-import { supabase } from "../../client";
+// ForgotPassword.js
+import React, { useState } from 'react';
+import { Form, Input, Button, message } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../client';
+import './forgot.css'
 
 const ForgotPassword = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      const { data, error } = await supabase.auth.resetPasswordForEmail(
+      const { error } = await supabase.auth.resetPasswordForEmail(
         values.email
       );
 
@@ -17,30 +20,15 @@ const ForgotPassword = () => {
         throw error;
       }
 
-      console.log(data);
-      message.success("Password reset email sent successfully!");
+      message.success('Password reset email sent successfully!');
+      // Chuyển hướng đến trang đổi mật khẩu
+      navigate('/changepass');
     } catch (error) {
-      message.error("Error: " + error.message);
+      message.error('Error: ' + error.message);
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === "PASSWORD_RECOVERY") {
-        const newPassword = prompt(
-          "What would you like your new password to be?"
-        );
-        const { data, error } = await supabase.auth.updateUser({
-          password: newPassword,
-        });
-
-        if (data) alert("Password updated successfully!");
-        if (error) alert("There was an error updating your password.");
-      }
-    });
-  }, []);
 
   return (
     <div className="forgot">
@@ -51,12 +39,12 @@ const ForgotPassword = () => {
           name="email"
           rules={[
             {
-              type: "email",
-              message: "The input is not a valid email!",
+              type: 'email',
+              message: 'The input is not a valid email!',
             },
             {
               required: true,
-              message: "Please input your email!",
+              message: 'Please input your email!',
             },
           ]}
         >
