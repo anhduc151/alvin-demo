@@ -36,13 +36,17 @@ const SignInOTP = () => {
       </Link>
 
       <div className="sign_in_box">
-        <h1>Sign In OTP</h1>
+        <h1 className="sign_in_box_h1">OTP</h1>
         <Input
           type="text"
-          placeholder="Enter Email Address or Phone Number"
+          placeholder="Enter Email Address"
           onChange={(e) => setEmailForOTP(e.target.value)}
         />
-        <Button type="primary" onClick={() => sendOTP(emailForOTP)}>
+        <Button
+          type="primary"
+          onClick={() => sendOTP(emailForOTP)}
+          className="sign_in_btn"
+        >
           Send OTP
         </Button>
       </div>

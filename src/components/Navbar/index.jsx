@@ -130,7 +130,7 @@ const Navbar = () => {
           </li>
         </Link>
 
-        <Link to="/blog-list" className="decoration">
+        {/* <Link to="/blog-list" className="decoration">
           {" "}
           <li
             className={`nav_links_li ${
@@ -139,18 +139,18 @@ const Navbar = () => {
           >
             Exchanges
           </li>
-        </Link>
-        <Link to="/contact" className="decoration">
+        </Link> */}
+        <Link to="/posts-crypto" className="decoration">
           <li
             className={`nav_links_li ${
-              activePage === "/contact" ? "active" : ""
+              activePage === "/posts-crypto" ? "active" : ""
             }`}
           >
-            NFT
+            Posts Crypto
           </li>
         </Link>
 
-        <Link to="/create" className="decoration">
+        {/* <Link to="/create" className="decoration">
           {" "}
           <li
             className={`nav_links_li ${
@@ -159,7 +159,7 @@ const Navbar = () => {
           >
             Learn
           </li>
-        </Link>
+        </Link> */}
 
         <Link to="/blog" className="decoration">
           {" "}

@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { publicRoutes } from "./router";
+import { RoutesApp } from "./router";
 import DefaultLayout from "./layout/DefaultLayout";
 import DarkMode from "./components/DarkMode";
 import "./App.css";
@@ -39,7 +39,7 @@ function App() {
             ""
           )} */}
 
-          {publicRoutes.map((route, index) => {
+          {RoutesApp.map((route, index) => {
             const Page = route.component;
             let Layout = DefaultLayout;
             if (route.layout) {

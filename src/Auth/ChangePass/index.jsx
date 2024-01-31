@@ -1,8 +1,9 @@
-// ChangePass.js
 import React, { useState } from "react";
 import { Form, Input, Button, message } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../client";
+import logonav from "../../assets/logo.png";
+
 
 const ChangePass = () => {
   const navigate = useNavigate();
@@ -33,8 +34,12 @@ const ChangePass = () => {
 
   return (
     <div className="sign_in">
+      <Link to="/" className="sign_in_logo">
+        <img src={logonav} alt="" className="navlanding_imgs" />
+        <p className="navlanding_title">Alvin AI</p>
+      </Link>
       <div className="sign_in_box">
-        <h1>Change Password</h1>
+        <h1 className="sign_in_box_h1">Change Password</h1>
         <Form layout="vertical" onFinish={onFinish}>
           <Form.Item
             label="New Password"
@@ -63,9 +68,11 @@ const ChangePass = () => {
             />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit">
+            <div className="sign_in_form_btn">
+            <Button type="primary" htmlType="submit" className="sign_in_btn">
               Update Password
             </Button>
+            </div>
           </Form.Item>
         </Form>
       </div>

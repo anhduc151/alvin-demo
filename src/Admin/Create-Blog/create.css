@@ -1,0 +1,148 @@
+/* css create */
+.create {
+  padding: 110px 10%;
+  min-height: 100vh;
+}
+
+.create_result {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ffffffff;
+  text-align: center;
+  box-shadow: 4px 4px 4px 1px rgba(0, 0, 0, 0.2);
+}
+
+.create_result_h3 {
+  color: #000;
+}
+
+.create_result_p {
+  color: #000;
+}
+
+.create_show {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.create_title {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 20px;
+  box-shadow: 4px 4px 4px 1px rgba(0, 0, 0, 0.2);
+}
+
+.create_event_p {
+  margin-bottom: 10px;
+}
+
+.title_icons {
+  color: red;
+  font-size: 20px;
+}
+
+.create_event_p {
+  font-size: 20px;
+}
+
+/* .ql-toolbar {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom: 2px solid #000 !important;
+  }
+  
+  .ql-editor {
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px;
+  }
+  
+  .quill {
+    border-radius: 10px !important;
+  }
+  
+  .quils {
+    margin-bottom: 20px;
+    border-radius: 9px !important;
+    box-shadow: 4px 4px 4px 1px rgba(0, 0, 0, 0.2);
+  } */
+
+.create_btn {
+  width: 200px;
+  border: none;
+  padding: 10px;
+  outline: none;
+  border-radius: 5px;
+  background-color: rgb(235, 101, 23);
+  color: #ffffff;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  box-shadow: 4px 4px 4px 1px rgba(0, 0, 0, 0.2);
+}
+
+.create_btn:hover {
+  cursor: pointer;
+  background-color: rgb(221, 125, 16);
+}
+
+.create_add {
+  padding: 10px 45px;
+  color: #fff;
+  text-transform: uppercase;
+  border: 3px solid #fff;
+  position: relative;
+  bottom: -25px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #daffb7, #41bdf6);
+  box-shadow: 4px 4px 4px 1px rgba(0, 0, 0, 0.2);
+}
+
+.create_add:hover {
+  cursor: pointer;
+  background-image: linear-gradient(to right, #c9ff96, #29b4f5);
+}
+
+.create_delete {
+  background-color: red;
+  border-radius: 10px;
+  border: none;
+  width: 80px;
+  padding: 5px 20px;
+  color: #fff;
+}
+
+.create_delete:hover {
+  cursor: pointer;
+  background-color: rgb(187, 24, 24);
+}
+
+.create_edit {
+  background-color: yellowgreen;
+  border-radius: 10px;
+  border: none;
+  width: 80px;
+  padding: 5px 20px;
+  color: #fff;
+}
+
+.create_group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.create_edit:hover {
+  cursor: pointer;
+  background-color: #79ee0c;
+}
+
+@media screen and (max-width: 768px) {
+  .create_show {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
