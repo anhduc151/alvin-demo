@@ -1,3 +1,4 @@
+import ForgotPassword from "./Auth/ForgotPass";
 import SignIn from "./Auth/SignIn";
 import SignUp from "./Auth/SignUp";
 import CoinDetails from "./components/CoinDetails";
@@ -14,6 +15,7 @@ const publicRoutes = [
   { path: "/dashboard/:id", component: CoinDetails },
   { path: "/blog", component: Blog },
   { path: "/blog/:id", component: DetailsBlog },
+  { path: "/forgot-password", component: ForgotPassword, layout: null },
 ];
 
 const privateRoutes = [];

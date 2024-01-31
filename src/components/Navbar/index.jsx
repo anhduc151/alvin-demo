@@ -171,9 +171,7 @@ const Navbar = () => {
         </Link>
 
         <div className="nav_dropdown" onClick={toggleDropdown}>
-          <span>
-            <i className="bx bx-user-circle icons_user"></i>
-          </span>
+          <i className="bx bx-user-circle icons_user"></i>
           {isDropdownOpen && (
             <div className="dropdown_list">
               <p className="dropdown_list_p">

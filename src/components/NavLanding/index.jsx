@@ -1,21 +1,117 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./navlanding.css";
 import logonav from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const NavLanDing = () => {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const location = useLocation();
+  const [activePage, setActivePage] = useState("");
+  const [isNavVisible, setIsNavVisible] = useState(true);
+  const [previousScroll, setPreviousScroll] = useState(0);
+  const navRef = useRef(null);
+
+  // const closeNav = () => {
+  //   setIsNavOpen(false);
+  // };
+
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
+  const handleScroll = () => {
+    const currentScrollPos = window.scrollY;
+    const isScrolledDown = currentScrollPos > previousScroll;
+
+    if (isScrolledDown && currentScrollPos > 200) {
+      setIsNavVisible(false);
+    } else {
+      setIsNavVisible(true);
+    }
+
+    setPreviousScroll(currentScrollPos);
+  };
+
+  useEffect(() => {
+    setPreviousScroll(window.scrollY);
+  }, []);
+
+  useEffect(() => {
+    const pathname = location.pathname;
+    setActivePage(pathname);
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [location, isNavVisible, previousScroll]);
+
   return (
-    <div className="navlanding">
-      <div className="navlanding_logo">
-        <img src={logonav} alt="" className="navlanding_imgs" />
-        <p className="navlanding_title">Alvin AI</p>
+    <div
+      className={`navlanding ${isNavVisible ? "nav_visible" : "nav_hidden"}`}
+    >
+      <div className="navlanding_icons">
+        <Link to="/" className="navlanding_logo decoration">
+          <img src={logonav} alt="" className="navlanding_imgs" />
+          <p className="navlanding_title">Alvin AI</p>
+        </Link>
+
+        <div className="navlanding_icon">
+          <input
+            type="checkbox"
+            id="checkbox"
+            checked={isNavOpen}
+            onChange={toggleNav}
+          />
+          <label htmlFor="checkbox" className="toggle">
+            <div className="bars" id="bar1"></div>
+            <div className="bars" id="bar2"></div>
+            <div className="bars" id="bar3"></div>
+          </label>
+        </div>
       </div>
 
-      <ul className="navlanding_ul">
-        <li className="navlanding_li">RabbitHole</li>
-        <li className="navlanding_li">Quest Terminal</li>
-        <li className="navlanding_li">FAQ</li>
-        <li className="navlanding_li">Blog</li>
+      <ul className={`navlanding_ul ${isNavOpen ? "navlanding_open" : ""}`}>
+        <Link to="/" className="decoration">
+          <li
+            className={`navlanding_li ${
+              activePage === "/" ? "landingactive" : ""
+            }`}
+          >
+            Home
+          </li>
+        </Link>
+
+        <Link to="/quest" className="decoration">
+          <li
+            className={`navlanding_li ${
+              activePage === "/quest" ? "landingactive" : ""
+            }`}
+          >
+            Quest Terminal
+          </li>
+        </Link>
+
+        <Link to="/faq" className="decoration">
+          <li
+            className={`navlanding_li ${
+              activePage === "/faq" ? "landingactive" : ""
+            }`}
+          >
+            FAQ
+          </li>
+        </Link>
+
+        <Link to="/blogs" className="decoration">
+          <li
+            className={`navlanding_li ${
+              activePage === "/blogs" ? "landingactive" : ""
+            }`}
+          >
+            Blog
+          </li>
+        </Link>
       </ul>
 
       <div className="navlanding_apps">

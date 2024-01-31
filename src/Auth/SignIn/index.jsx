@@ -35,13 +35,16 @@ const SignIn = ({ setToken }) => {
       const { user, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
       });
-  
+
+      console.log("Google Auth User:", user);
+      console.log("Google Auth Error:", error);
+
       if (error) {
         throw error;
       }
-  
-      console.log(user);
       navigate("/dashboard");
+
+      console.log(user);
       message.success("Login with Google successful!");
     } catch (error) {
       message.error("Error: " + error.message);
@@ -94,6 +97,10 @@ const SignIn = ({ setToken }) => {
             />
           </Form.Item>
 
+          <Link to="/forgot-password" className="forgot-password-link">
+            Forgot Password?
+          </Link>
+
           <div className="sign_in_form_btn">
             <Form.Item>
               <Button
@@ -122,6 +129,11 @@ const SignIn = ({ setToken }) => {
         <div className="sign_in_google" onClick={signInWithGoogle}>
           <img src={google} alt="" className="sign_in_google_imgs" />
           <p className="sign_in_google_p">Continue with Google</p>
+        </div>
+
+        <div className="sign_in_otp">
+          <input type="text" placeholder="Enter Email Address"/>
+          <button>Continue</button>
         </div>
       </div>
 

@@ -7,6 +7,50 @@ import blog3 from "../../assets/blog3.png";
 import { Link } from "react-router-dom";
 
 const Blog = () => {
+  // const fetchPost = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       "https://lunarcrush.com/api4/public/topic/bitcoin/posts/v1",
+  //       {
+  //         headers: {
+  //           Authorization: "Bearer 9xj7on8tj5q0cqecn9gqvq2w75lrk4vgqrwwvx9cc",
+  //         },
+  //       }
+  //     );
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! Status: ${response.status}`);
+  //     }
+  //     const data = await response.json();
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
+
+  // fetchPost();
+
+  const DetailsPost = async () => {
+    try {
+      const response = await fetch(
+        "https://lunarcrush.com/api4/public/topic/bitcoin/posts/v1",
+        {
+          headers: {
+            Authorization: "Bearer 9xj7on8tj5q0cqecn9gqvq2w75lrk4vgqrwwvx9cc",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const dataDetails = await response.json();
+      console.log(dataDetails);
+    } catch (error) { 
+      console.error("Error fetching details:", error);
+    }
+  }
+
+  DetailsPost();
+
   return (
     <div className="blog">
       <Link to="/blog/1" className="blog_box">

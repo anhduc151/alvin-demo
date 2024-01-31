@@ -4,7 +4,7 @@
   justify-content: space-between;
   width: 100%;
   height: 60px;
-  border-bottom: var(--box_border);
+  /* border-bottom: var(--box_border); */
   padding: 0 5%;
   /* justify-content: space-between; */
   background-color: #111111;
@@ -135,7 +135,7 @@
 .bars {
   width: 100%;
   height: 4px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(113, 8, 173);
   border-radius: 4px;
 }
 
@@ -207,7 +207,7 @@
 }
 
 .dropdown_list_p:nth-child(3) {
-  border-top: 1px solid #8a8383;
+  border-top: 3px solid #8a8383;
   padding-top: 5px;
 }
 
@@ -242,12 +242,16 @@
 
   .nav_links_open {
     display: flex;
-    width: 100%;
-    background-color: #333;
+    padding: 0 2%;
+    width: 75%;
+    height: 100vh;
+    background-color: #000000c2;
     flex-direction: column;
     position: absolute;
     top: 60px;
-    left: 0;
+    font-weight: bold;
+    right: 0;
+    border-bottom: 1px solid #fff;
     z-index: 100;
   }
 
@@ -263,5 +267,70 @@
 
   .nav_links_li {
     text-align: center;
+  }
+
+  .dropdown_list {
+    width: 100%;
+    padding: 0;
+    position: static;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    gap: 0px;
+    box-shadow: none;
+  }
+
+  .dropdown_list::before {
+    display: none;
+  }
+
+  .nav_dropdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .dropdown_list_p {
+    margin: 16px 5px ;
+    padding: 14px 12px ;
+    border-bottom: 1px solid #464444;
+  }
+
+  .nav_links .decoration {
+    margin: 0;
+    padding: 0;
+    width: 100% !important;
+    border-bottom: 1px solid #444141;
+    border-radius: 0px;
+    display: flex;
+    justify-content: flex-start;
+    color: var(--body_color);
+  }
+
+  .icons_user {
+    margin: 16px 5px 0;
+    padding: 14px 12px;
+    border-bottom: 1px solid #4b4848;
+  }
+
+  .dropdown_list_p:nth-child(3) {
+    border-top: none;
+    border-bottom: none;
+    border-radius: 10px;
+    padding-top: 16px;
+    background-color: #fff;
+    color: #000;
+    margin-top: 0;
+  }
+
+  .dropdown_list_p:nth-child(3):hover {
+    background-color: #9c0ad6;
+    color: #fff;
+  }
+
+  .dropdown_list_p:nth-child(2) {
+    /* border-bottom: 5px solid #9c0ad6; */
+    margin-top: 0;
   }
 }

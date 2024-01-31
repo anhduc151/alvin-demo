@@ -132,7 +132,7 @@
 
   .dashboard_overview_trending {
     display: flex;
-    padding: 0 2%;
+    padding: 30px 2%;
     flex-direction: column;
   }
 
