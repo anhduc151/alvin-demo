@@ -10,7 +10,9 @@ import Blog from "./pages/Blog";
 import BlogDetail from "./pages/Blog/DetailsBlog";
 import DashBoard from "./pages/Dashboard";
 import Home from "./pages/Landingpages/Home";
+import PostDemo from "./pages/Landingpages/Post-Crypto";
 import PostCrypto from "./pages/Post";
+import DetailsPosts from "./pages/Post/DetailsPost";
 
 const RoutesApp = [
   { path: "/", component: Home, layout: null },
@@ -25,7 +27,9 @@ const RoutesApp = [
   { path: "/sign-in-otp", component: SignInOTP, layout: null },
   { path: "/changepass", component: ChangePass, layout: null },
   { path: "/posts-crypto", component: PostCrypto },
+  { path: "/posts-crypto/:id", component: DetailsPosts },
   { path: "/create-blog", component: CreateBlog },
+  { path: "/post-crypto-demo", component: PostDemo, layout: null },
 ];
 
 export { RoutesApp };

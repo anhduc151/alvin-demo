@@ -2,13 +2,32 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../../client";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import './create.css'
+import "./create.css";
+import { Link } from "react-router-dom";
+import { Pagination } from "antd";
 
 const CreateBlog = () => {
   const [posts, setPosts] = useState([]);
   const [post, setPost] = useState({ id: null, title: "", description: "" });
   const { title, description } = post;
   const [isEditing, setIsEditing] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // handle panigation
+  const postsPerPage = 5;
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+    fetchPosts();
+  }, [searchTerm]);
 
   const handleQuillChange = (value) => {
     setPost({ ...post, description: value });
@@ -17,7 +36,10 @@ const CreateBlog = () => {
   // fetch data
   async function fetchPosts() {
     try {
-      const { data, error } = await supabase.from("blogs").select();
+      const { data, error } = await supabase
+        .from("blogs")
+        .select()
+        .ilike("title", `%${searchTerm}%`);
       if (error) {
         console.error("Error fetching posts:", error.message);
       } else {
@@ -50,7 +72,11 @@ const CreateBlog = () => {
   // edit post
   const handleEdit = (id) => {
     const postToEdit = posts.find((p) => p.id === id);
-    setPost({ id, title: postToEdit.title, description: postToEdit.description });
+    setPost({
+      id,
+      title: postToEdit.title,
+      description: postToEdit.description,
+    });
     setIsEditing(true);
   };
 
@@ -129,15 +155,29 @@ const CreateBlog = () => {
         </button>
       </div>
 
+      <div className="search_blogs">
+        <input
+          type="text"
+          placeholder="Search Blogs"
+          className="search_blogs_input"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
       <div className="create_show">
-        {posts.map((product) => (
+        {currentPosts.map((product) => (
           <div key={product.id} className="create_result">
             <h3 className="create_result_h3">{product.title}</h3>
             <p
               dangerouslySetInnerHTML={{ __html: product.description }}
               className="create_result_p"
             />
+
             <div className="create_group">
+              <Link to={`/blog/${product.id} `}>
+                <button className="create_view">View</button>
+              </Link>
               <button
                 onClick={() => {
                   if (isEditing) {
@@ -159,6 +199,15 @@ const CreateBlog = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="blogs_panigation">
+        <Pagination
+          current={currentPage}
+          total={posts.length}
+          pageSize={postsPerPage}
+          onChange={handlePageChange}
+        />
       </div>
     </div>
   );

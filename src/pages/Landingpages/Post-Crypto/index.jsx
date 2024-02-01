@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./post.css";
+import "../../Post/post.css";
 import { Pagination } from "antd";
+import FootLanDing from "../../../components/FootLanDing";
+import NavLanDing from "../../../components/NavLanding";
 
-const PostCrypto = () => {
+const PostDemo = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,9 +41,9 @@ const PostCrypto = () => {
     };
     fetchData();
   }, []);
-
   return (
     <>
+      <NavLanDing />
       <div className="blog">
         {loading ? (
           <p>Loading ...</p>
@@ -77,19 +79,18 @@ const PostCrypto = () => {
                   </div>
                 </Link>
               ))}
+            <Pagination
+              current={currentPage}
+              total={posts.length}
+              pageSize={10}
+              onChange={handlePageChange}
+            />
           </>
         )}
       </div>
-      <div className="blogs_panigation">
-        <Pagination
-          current={currentPage}
-          total={posts.length}
-          pageSize={10}
-          onChange={handlePageChange}
-        />
-      </div>
+      <FootLanDing />
     </>
   );
 };
 
-export default PostCrypto;
+export default PostDemo;

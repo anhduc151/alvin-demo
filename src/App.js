@@ -35,9 +35,9 @@ function App() {
         <Routes>
           {/* {token ? (
             <Route path={"/dashboard"} element={<DashBoard token={token} />} />
-          ) : (
-            ""
-          )} */}
+            ) : (
+              ""
+            )} */}
 
           {RoutesApp.map((route, index) => {
             const Page = route.component;

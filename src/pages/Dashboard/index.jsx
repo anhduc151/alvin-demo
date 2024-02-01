@@ -19,8 +19,6 @@ const DashBoard = ({ token }) => {
   //   navigate("/");
   // };
 
-  
-
   // call api coingecko
   useEffect(() => {
     axios
@@ -250,27 +248,6 @@ const DashBoard = ({ token }) => {
           </div>
         </div>
       </div>
-
-      {/* <Spin
-        spinning={loading}
-        indicator={<div className="loader"></div>}
-        className="dashboard_table"
-      >
-        <Table
-          columns={columns}
-          dataSource={filterCoins}
-          rowKey={(record) => record.id}
-          scroll={{ x: true }}
-        />
-      </Spin> */}
-
-      {/* <div className="forminput">
-        <Search
-          placeholder="Search Name Coin ..."
-          className="search"
-          onChange={handleChange}
-        />
-      </div> */}
 
       <div className="dashboard_table">
         <Table

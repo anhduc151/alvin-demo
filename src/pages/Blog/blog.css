@@ -1,9 +1,10 @@
 /* css blog */
 .blog {
   display: grid;
-  padding: 100px 5%;
+  padding: 100px 5% 26px;
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
+  min-height: 100vh;
 }
 
 .blog_box_head {
@@ -42,6 +43,14 @@
   text-overflow: ellipsis;
 }
 
+.blog_box_foot_h2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .blog_box_foot_btn {
   border: 2px solid #363434;
   width: 150px;
@@ -64,6 +73,29 @@
 
 .icons_read {
   color: rgb(12, 243, 205);
+}
+
+.blogs_panigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+/* css blog_detail */
+.blog_detail {
+  display: flex;
+  padding: 100px 5%;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+
+.blog_detail_box {
+  display: flex;
+  padding: 0 15%;
+  gap: 20px;
+  flex-direction: column;
 }
 
 @media screen and (max-width: 768px) {
