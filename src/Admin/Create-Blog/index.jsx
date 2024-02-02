@@ -15,7 +15,7 @@ const CreateBlog = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   // handle panigation
-  const postsPerPage = 5;
+  const postsPerPage = 6;
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
@@ -155,17 +155,20 @@ const CreateBlog = () => {
         </button>
       </div>
 
-      <div className="search_blogs">
-        <input
-          type="text"
-          placeholder="Search Blogs"
-          className="search_blogs_input"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-
       <div className="create_show">
+        <p className="create_blogs_title">
+          <i className="bx bx-stats title_icons"></i> Blogs List
+        </p>
+
+        <div className="search_blogs">
+          <input
+            type="text"
+            placeholder="Search Blogs"
+            className="search_blogs_input"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
         {currentPosts.map((product) => (
           <div key={product.id} className="create_result">
             <h3 className="create_result_h3">{product.title}</h3>

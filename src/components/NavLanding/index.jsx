@@ -93,7 +93,7 @@ const NavLanDing = () => {
           </li>
         </Link>
 
-        <Link to="/faq" className="decoration">
+        {/* <Link to="/faq" className="decoration">
           <li
             className={`navlanding_li ${
               activePage === "/faq" ? "landingactive" : ""
@@ -101,7 +101,7 @@ const NavLanDing = () => {
           >
             FAQ
           </li>
-        </Link>
+        </Link> */}
 
         <Link to="/blogs" className="decoration">
           <li

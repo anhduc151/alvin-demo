@@ -180,12 +180,37 @@
   color: #fff;
   border-radius: 10px;
   background-color: #2b2b2b;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.create_blogs_title {
+  font-size: 20px;
 }
 
 @media screen and (max-width: 768px) {
   .create_show {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .create_group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .create_result_p p {
+    width: 100%;
+  }
+
+  .create_result_h3 {
+    width: 100%;
+  }
+
+  h2 {
+    width: 100%;
+  }
+
+  .create_result {
+    width: 100%;
   }
 }

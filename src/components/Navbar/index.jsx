@@ -6,6 +6,7 @@ import DarkMode from "../DarkMode";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../client";
 import { message } from "antd";
+import navdropdown from "../../assets/dropdown.png";
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -171,7 +172,15 @@ const Navbar = () => {
         </Link>
 
         <div className="nav_dropdown" onClick={toggleDropdown}>
-          <i className="bx bx-user-circle icons_user"></i>
+          {/* <i className="bx bx-user-circle icons_user"></i> */}
+          <div className="nav_dropdown_clicks">
+            <img src={navdropdown} alt="" className="icons_user" />
+            <i
+              className={`bx bx-chevron-up icon_arr ${
+                !isDropdownOpen ? "openarr" : "closearr"
+              }`}
+            ></i>
+          </div>
           {isDropdownOpen && (
             <div className="dropdown_list">
               <p className="dropdown_list_p">

@@ -3,7 +3,7 @@ import "./blog.css";
 import blogImage from "../../assets/blog.png";
 import { supabase } from "../../client";
 import { Link } from "react-router-dom";
-import { Pagination } from "antd";
+import { Pagination, Skeleton } from "antd";
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
@@ -38,7 +38,62 @@ const Blog = () => {
     <>
       <div className="blog">
         {loading ? (
-          <p>Loading ...</p>
+          <>
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+          </>
         ) : (
           <>
             {currentPosts.map((blog) => (

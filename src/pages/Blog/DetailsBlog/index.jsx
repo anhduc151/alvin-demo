@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../../../client";
 import "../blog.css";
+import { Skeleton } from "antd";
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -30,7 +31,35 @@ const BlogDetail = () => {
   return (
     <div className="blog_detail">
       {loading ? (
-        <p>Loading ...</p>
+        // <p>Loading ...</p>
+        <>
+          <Skeleton
+            title={false}
+            paragraph={{
+              rows: 10,
+              width: ["100%", "80%", "60%", "40%"],
+            }}
+            active
+          />
+
+          <Skeleton
+            title={false}
+            paragraph={{
+              rows: 10,
+              width: ["100%", "80%", "60%", "40%"],
+            }}
+            active
+          />
+
+          <Skeleton
+            title={false}
+            paragraph={{
+              rows: 10,
+              width: ["100%", "80%", "60%", "40%"],
+            }}
+            active
+          />
+        </>
       ) : (
         <div className="blog_detail_box">
           <h2 className="blog_detail_box_h2">{blog.title}</h2>

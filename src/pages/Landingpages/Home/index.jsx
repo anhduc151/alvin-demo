@@ -55,6 +55,20 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      <div className="home_devices">
+        <div className="home_devices_box">
+          <h1 className="home_questions_h1">Optimized size for all devices</h1>
+        </div>
+
+        <div className="home_devices_res">
+          <div className="home_devices_res_container">
+            <div className="loader"></div>
+            <div className="loader"></div>
+            <div className="loader"></div>
+          </div>
+        </div>
+      </div>
       <FootLanDing />
     </div>
   );

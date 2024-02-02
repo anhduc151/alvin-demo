@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Input, Table, Spin, message } from "antd";
+import { Input, Table, Spin, message, Skeleton } from "antd";
 import axios from "axios";
 import Coin from "../../components/Coin";
 import "./dashboard.css";
@@ -142,25 +142,22 @@ const DashBoard = ({ token }) => {
       {/* <button onClick={handleLogout}>Logout</button> */}
 
       <div className="dashboard_overview">
-        <h2 className="dashboard_overview_h2">Markets Overview</h2>
+        <h2 className="dashboard_overview_h2">
+          <i className="bx bx-stats title_icons"></i> Markets Overview
+        </h2>
         <div className="dashboard_overview_trending">
           <div className="dashboard_overview_box">
             <p className="dashboard_overview_box_p">🔥Hot Coins</p>
             {loading ? (
-              <div className="loading_circle">
-                <div className="ui-loader loader-blk">
-                  <svg viewBox="22 22 44 44" className="multiColor-loader">
-                    <circle
-                      cx="44"
-                      cy="44"
-                      r="20.2"
-                      fill="none"
-                      strokeWidth="3.6"
-                      className="loader-circle loader-circle-animation"
-                    ></circle>
-                  </svg>
-                </div>
-              </div>
+              <Skeleton
+                avatar={{ size: "large" }}
+                title={false}
+                paragraph={{
+                  rows: 4,
+                  width: ["100%", "80%", "60%", "40%"],
+                }}
+                active
+              />
             ) : (
               <>
                 {selectedCoins.map((coin) => (
@@ -181,20 +178,29 @@ const DashBoard = ({ token }) => {
           <div className="dashboard_overview_box">
             <p className="dashboard_overview_box_p">🚀Top Gainer Coin</p>
             {loading ? (
-              <div className="loading_circle">
-                <div className="ui-loader loader-blk">
-                  <svg viewBox="22 22 44 44" className="multiColor-loader">
-                    <circle
-                      cx="44"
-                      cy="44"
-                      r="20.2"
-                      fill="none"
-                      strokeWidth="3.6"
-                      className="loader-circle loader-circle-animation"
-                    ></circle>
-                  </svg>
-                </div>
-              </div>
+              // <div className="loading_circle">
+              //   <div className="ui-loader loader-blk">
+              //     <svg viewBox="22 22 44 44" className="multiColor-loader">
+              //       <circle
+              //         cx="44"
+              //         cy="44"
+              //         r="20.2"
+              //         fill="none"
+              //         strokeWidth="3.6"
+              //         className="loader-circle loader-circle-animation"
+              //       ></circle>
+              //     </svg>
+              //   </div>
+              // </div>
+              <Skeleton
+                avatar={{ size: "large" }}
+                title={false}
+                paragraph={{
+                  rows: 4,
+                  width: ["100%", "80%", "60%", "40%"],
+                }}
+                active
+              />
             ) : (
               <>
                 {latestCoins.map((coin) => (
@@ -215,20 +221,16 @@ const DashBoard = ({ token }) => {
           <div className="dashboard_overview_box">
             <p className="dashboard_overview_box_p">🔈Top Volume Coin</p>
             {loading ? (
-              <div className="loading_circle">
-                <div className="ui-loader loader-blk">
-                  <svg viewBox="22 22 44 44" className="multiColor-loader">
-                    <circle
-                      cx="44"
-                      cy="44"
-                      r="20.2"
-                      fill="none"
-                      strokeWidth="3.6"
-                      className="loader-circle loader-circle-animation"
-                    ></circle>
-                  </svg>
-                </div>
-              </div>
+              //
+              <Skeleton
+                avatar={{ size: "large" }}
+                title={false}
+                paragraph={{
+                  rows: 4,
+                  width: ["100%", "80%", "60%", "40%"],
+                }}
+                active
+              />
             ) : (
               <>
                 {highVolumeCoins.map((coin) => (
@@ -250,13 +252,44 @@ const DashBoard = ({ token }) => {
       </div>
 
       <div className="dashboard_table">
-        <Table
-          columns={columns}
-          dataSource={filterCoins}
-          rowKey={(record) => record.id}
-          scroll={{ x: true }}
-          // loading={loading}
-        />
+        <h2 className="dashboard_overview_h2">
+          <i className="bx bx-stats title_icons"></i> Coins
+        </h2>
+
+        {loading ? (
+          <>
+            <Skeleton
+              title={false}
+              paragraph={{
+                rows: 10,
+                width: [
+                  "100%",
+                  "90%",
+                  "80%",
+                  "70%",
+                  "60%",
+                  "50%",
+                  "40%",
+                  "30%",
+                  "20%",
+                  "10%",
+                ],
+              }}
+              active
+            />
+          </>
+        ) : (
+          <>
+            <Table
+              columns={columns}
+              dataSource={filterCoins}
+              rowKey={(record) => record.id}
+              scroll={{ x: true }}
+              pagination={{ position: "bottom", showSizeChanger: true }}
+              className="centered-pagination-table"
+            />
+          </>
+        )}
       </div>
     </div>
   );

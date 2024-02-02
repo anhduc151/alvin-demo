@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./post.css";
-import { Pagination } from "antd";
+import { Pagination, Skeleton } from "antd";
 
 const PostCrypto = () => {
   const [posts, setPosts] = useState([]);
@@ -44,7 +44,62 @@ const PostCrypto = () => {
     <>
       <div className="blog">
         {loading ? (
-          <p>Loading ...</p>
+          <>
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+          </>
         ) : (
           <>
             {posts

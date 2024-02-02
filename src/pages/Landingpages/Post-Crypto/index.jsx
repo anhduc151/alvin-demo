@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../Post/post.css";
-import { Pagination } from "antd";
+import { Pagination, Skeleton } from "antd";
 import FootLanDing from "../../../components/FootLanDing";
 import NavLanDing from "../../../components/NavLanding";
 
@@ -44,9 +44,65 @@ const PostDemo = () => {
   return (
     <>
       <NavLanDing />
-      <div className="blog">
+      <div className="post_crypto">
         {loading ? (
-          <p>Loading ...</p>
+          // <p>Loading ...</p>
+          <>
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+            <Skeleton
+              avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{
+                rows: 4,
+                width: ["100%", "80%", "60%", "40%"],
+              }}
+              active
+            />
+          </>
         ) : (
           <>
             {posts
@@ -79,14 +135,16 @@ const PostDemo = () => {
                   </div>
                 </Link>
               ))}
-            <Pagination
-              current={currentPage}
-              total={posts.length}
-              pageSize={10}
-              onChange={handlePageChange}
-            />
           </>
         )}
+      </div>
+      <div className="blogs_panigation">
+        <Pagination
+          current={currentPage}
+          total={posts.length}
+          pageSize={10}
+          onChange={handlePageChange}
+        />
       </div>
       <FootLanDing />
     </>

@@ -125,6 +125,11 @@
   }
 }
 
+.centered-pagination-table .ant-pagination {
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 768px) {
   .dashboard {
     padding: 1%;
@@ -132,7 +137,7 @@
 
   .dashboard_overview_trending {
     display: flex;
-    padding: 30px 2%;
+    padding: 30px 2% 0;
     flex-direction: column;
   }
 

@@ -9,6 +9,7 @@ import CoinDetails from "./components/CoinDetails";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/Blog/DetailsBlog";
 import DashBoard from "./pages/Dashboard";
+import BlogLanding from "./pages/Landingpages/Blog-Landing";
 import Home from "./pages/Landingpages/Home";
 import PostDemo from "./pages/Landingpages/Post-Crypto";
 import PostCrypto from "./pages/Post";
@@ -30,6 +31,7 @@ const RoutesApp = [
   { path: "/posts-crypto/:id", component: DetailsPosts },
   { path: "/create-blog", component: CreateBlog },
   { path: "/post-crypto-demo", component: PostDemo, layout: null },
+  { path: "/blogs", component: BlogLanding, layout: null },
 ];
 
 export { RoutesApp };
