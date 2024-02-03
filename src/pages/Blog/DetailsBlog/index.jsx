@@ -28,6 +28,10 @@ const BlogDetail = () => {
     fetchBlog();
   }, [id]);
 
+  useEffect(() => {
+    document.title = "Details Blog - Alvin AI";
+  }, []);
+
   return (
     <div className="blog_detail">
       {loading ? (

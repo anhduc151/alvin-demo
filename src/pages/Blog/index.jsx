@@ -34,6 +34,10 @@ const Blog = () => {
     fetchPosts();
   }, []);
 
+  useEffect(() => {
+    document.title = "Blogs - Alvin AI";
+  }, []);
+
   return (
     <>
       <div className="blog">

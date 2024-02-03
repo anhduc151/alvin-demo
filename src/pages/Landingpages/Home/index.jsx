@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./home.css";
 import NavLanDing from "../../../components/NavLanding";
 import bal from "../../../assets/BAL.png";
@@ -12,6 +12,10 @@ import xbc from "../../../assets/XBC.png";
 import FootLanDing from "../../../components/FootLanDing";
 
 const Home = () => {
+  useEffect(() => {
+    document.title = " Alvin AI";
+  }, []);
+
   return (
     <div className="home">
       <NavLanDing />

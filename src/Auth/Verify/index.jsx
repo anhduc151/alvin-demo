@@ -38,6 +38,10 @@ const VerifyEmail = () => {
     }
   };
 
+  useEffect(() => {
+    document.title = "Verify - Alvin AI";
+  }, []);
+
   return (
     <div>
       <p>Verifying email...</p>

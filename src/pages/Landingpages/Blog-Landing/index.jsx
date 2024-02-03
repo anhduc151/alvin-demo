@@ -35,6 +35,10 @@ const BlogLanding = () => {
   useEffect(() => {
     fetchPosts();
   }, []);
+
+  useEffect(() => {
+    document.title = "Blog - Alvin AI";
+  }, []);
   return (
     <>
       <NavLanDing />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Button, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../client";
@@ -31,6 +31,10 @@ const ChangePass = () => {
       message.error("Please confirm your email and return change password!");
     }
   };
+
+  useEffect(() => {
+    document.title = "Change password - Alvin AI";
+  }, []);
 
   return (
     <div className="sign_in">

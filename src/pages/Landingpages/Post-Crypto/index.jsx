@@ -41,6 +41,11 @@ const PostDemo = () => {
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    document.title = "Hot Posts Crypto - Alvin AI";
+  }, []);
+
   return (
     <>
       <NavLanDing />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Checkbox, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../client";
@@ -52,6 +52,10 @@ const SignIn = ({ setToken }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    document.title = "Sign in - Alvin AI";
+  }, []);
 
   return (
     <div className="sign_in">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Input, Button, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../client";
@@ -27,6 +27,10 @@ const SignUp = () => {
       message.error(error.message);
     }
   };
+
+  useEffect(() => {
+    document.title = "Sign up - Alvin AI";
+  }, []);
 
   return (
     <div className="sign_in">

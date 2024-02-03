@@ -136,6 +136,10 @@ const DashBoard = ({ token }) => {
     }
   }, [coins]);
 
+  useEffect(() => {
+    document.title = "Dashboard - Alvin AI";
+  }, []);
+
   return (
     <div className="dashboard">
       {/* <h3>Welcome back, {token.user.user_metadata.full_name}</h3> */}

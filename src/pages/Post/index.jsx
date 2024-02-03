@@ -40,6 +40,10 @@ const PostCrypto = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    document.title = "Hot Posts Crypto - Alvin AI";
+  }, []);
+
   return (
     <>
       <div className="blog">

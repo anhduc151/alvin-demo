@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Button, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../../../client";
@@ -27,6 +27,10 @@ const SignInOTP = () => {
       console.log("Error sending OTP", error.message);
     }
   };
+
+  useEffect(() => {
+    document.title = "Sign in OTP - Alvin AI";
+  }, []);
 
   return (
     <div className="sign_in">

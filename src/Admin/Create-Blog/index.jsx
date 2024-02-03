@@ -126,6 +126,10 @@ const CreateBlog = () => {
   useEffect(() => {
     fetchPosts();
   }, []);
+
+  useEffect(() => {
+    document.title = "CRUD Blogs - Alvin AI";
+  }, []);
   return (
     <div className="create">
       <div className="create_event">
