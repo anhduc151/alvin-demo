@@ -1,4 +1,6 @@
-import CreateBlog from "./Admin/Create-Blog";
+import LoginAdmin from "./Admin/Login";
+import CreateBlog from "./Admin/pages/Create-Blog";
+import DashboardAdmin from "./Admin/pages/Dashboard-Admin";
 import ChangePass from "./Auth/ChangePass";
 import ForgotPassword from "./Auth/ForgotPass";
 import SignIn from "./Auth/SignIn";
@@ -12,6 +14,7 @@ import DashBoard from "./pages/Dashboard";
 import BlogLanding from "./pages/Landingpages/Blog-Landing";
 import Home from "./pages/Landingpages/Home";
 import PostDemo from "./pages/Landingpages/Post-Crypto";
+import NotFound from "./pages/NotFound";
 import PostCrypto from "./pages/Post";
 import DetailsPosts from "./pages/Post/DetailsPost";
 
@@ -29,9 +32,16 @@ const RoutesApp = [
   { path: "/changepass", component: ChangePass, layout: null },
   { path: "/posts-crypto", component: PostCrypto },
   { path: "/posts-crypto/:id", component: DetailsPosts },
-  { path: "/create-blog", component: CreateBlog },
   { path: "/post-crypto-demo", component: PostDemo, layout: null },
   { path: "/blogs", component: BlogLanding, layout: null },
+
+  // Routes Admin
+  { path: "/admin", component: LoginAdmin, layout: null },
+  { path: "/admin/create-blog", component: CreateBlog, layout: null },
+  { path: "/admin/dashboard", component: DashboardAdmin, layout: null },
+
+  // 404
+  { path: "/404",component: NotFound, layout: null },
 ];
 
 export { RoutesApp };

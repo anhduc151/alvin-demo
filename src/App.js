@@ -1,10 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { RoutesApp } from "./router";
 import DefaultLayout from "./layout/DefaultLayout";
 import DarkMode from "./components/DarkMode";
 import "./App.css";
-import DashBoard from "./pages/Dashboard";
 
 function App() {
   const [token, setToken] = useState(false);
@@ -51,15 +50,16 @@ function App() {
               <Route
                 key={index}
                 path={route.path}
-                // element={<Page />}
                 element={
                   <Layout>
                     <Page />
                   </Layout>
                 }
-              ></Route>
+              />
             );
           })}
+          {/* handle 404 pages */}
+          <Route path="*" element={<Navigate to="/404" />} />
         </Routes>
       </div>
     </Router>

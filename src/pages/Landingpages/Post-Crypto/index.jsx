@@ -118,13 +118,13 @@ const PostDemo = () => {
                   className="blog_box"
                   key={data.id}
                 >
-                  <div className="blog_box_head">
+                  {/* <div className="blog_box_head">
                     <img
                       src={data.creator_avatar}
                       alt=""
                       className="blog_box_head_imgs"
                     />
-                  </div>
+                  </div> */}
 
                   <div className="blog_box_foot">
                     <h2 className="blog_box_foot_h2">{data.post_title}</h2>

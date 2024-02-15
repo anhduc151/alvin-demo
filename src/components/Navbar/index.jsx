@@ -151,17 +151,6 @@ const Navbar = () => {
           </li>
         </Link>
 
-        <Link to="/create-blog" className="decoration">
-          {" "}
-          <li
-            className={`nav_links_li ${
-              activePage === "/create-blog" ? "active" : ""
-            }`}
-          >
-            Create
-          </li>
-        </Link>
-
         <Link to="/blog" className="decoration">
           {" "}
           <li
