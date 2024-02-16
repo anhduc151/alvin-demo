@@ -1,26 +1,37 @@
-// Trong file TopicsPost.js
+// Trang TopicsPost.js
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { supabase } from "../../../client";
 
 const TopicsPost = () => {
-  const [posts, setPosts] = useState([]);
   const { topicId } = useParams();
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchTopicPosts = async () => {
       try {
-        const { data, error } = await supabase
-          .from("posts")
-          .select("id, title, content")
+        const { data: topicPosts, error: topicPostsError } = await supabase
+          .from("topics_posts")
+          .select("post_id")
           .eq("topic_id", topicId);
 
-        if (error) {
-          throw error;
+        if (topicPostsError) {
+          throw topicPostsError;
         }
 
-        console.log(data);
-        setPosts(data);
+        const postIds = topicPosts.map((topicPost) => topicPost.post_id);
+
+        const { data: postsData, error: postsError } = await supabase
+          .from("posts")
+          .select("id, title, content")
+          .in("id", postIds);
+
+        if (postsError) {
+          throw postsError;
+        }
+        
+        console.log(postsData);
+        setPosts(postsData);
       } catch (error) {
         console.error("Error fetching topic posts:", error.message);
       }
@@ -30,14 +41,16 @@ const TopicsPost = () => {
   }, [topicId]);
 
   return (
-    <div>
-      <h2>Topic Posts</h2>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <h3>{post.title}</h3>
-          <p>{post.content}</p>
-        </div>
-      ))}
+    <div className="topics_posts">
+      <h2 className="topics_posts_h2">Lists Posts</h2>
+      <div className="topics_posts_list">
+        {posts.map((post) => (
+          <Link to={`/posts-crypto/${post.id}`} key={post.id} className="topics_posts_box">
+            <h3>{post.title}</h3>
+            <p className="posts_description">{post.content}</p>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

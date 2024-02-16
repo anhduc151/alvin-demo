@@ -79,7 +79,7 @@ const PostCrypto = () => {
 
   return (
     <>
-      <div className="blog">
+      <div className="posts">
         {loading ? (
           <>
             {[...Array(6)].map((_, index) => (

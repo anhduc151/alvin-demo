@@ -38,6 +38,13 @@
   color: #fff !important;
 }
 
+.posts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  /* min-height: 100vh; */
+}
+
 /* css details_posts */
 .details_posts {
   padding: 100px 10%;
