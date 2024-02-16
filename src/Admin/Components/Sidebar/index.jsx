@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./sidebar.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logonav from "../../../assets/logo.png";
+import { message } from "antd";
 
 const Sidebar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -10,6 +11,7 @@ const Sidebar = () => {
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [previousScroll, setPreviousScroll] = useState(0);
   const navRef = useRef(null);
+  const navigate = useNavigate();
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -26,6 +28,11 @@ const Sidebar = () => {
     }
 
     setPreviousScroll(currentScrollPos);
+  };
+
+  const handleLogout = () => {
+    navigate("/admin");
+    message.success("Logout Successfully!");
   };
 
   useEffect(() => {
@@ -77,7 +84,7 @@ const Sidebar = () => {
           </li>
         </Link>
 
-        <Link to="/post-crypto-demo" className="decoration">
+        {/* <Link to="/post-crypto-demo" className="decoration">
           <li
             className={`sidebar_li ${
               activePage === "/post-crypto-demo" ? "sidebaractive" : ""
@@ -90,9 +97,9 @@ const Sidebar = () => {
             ></i>
             News
           </li>
-        </Link>
+        </Link> */}
 
-        <Link to="/blogs" className="decoration">
+        {/* <Link to="/blogs" className="decoration">
           <li
             className={`sidebar_li ${
               activePage === "/blogs" ? "sidebaractive" : ""
@@ -105,12 +112,12 @@ const Sidebar = () => {
             ></i>
             Topic
           </li>
-        </Link>
+        </Link> */}
       </ul>
 
-      <Link to="/admin" className="decoration sidebar_logout">
+      <div className="decoration sidebar_logout" onClick={handleLogout}>
         <i className="bx bx-log-out-circle sidebar_logout_icons"></i> Logout
-      </Link>
+      </div>
     </div>
   );
 };

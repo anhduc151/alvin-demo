@@ -8,7 +8,7 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate("/");
+    navigate("/topics");
   };
 
   useEffect(() => {

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./post.css";
-import { Pagination, Skeleton } from "antd";
+import { Pagination, Skeleton, Progress } from "antd";
+import { supabase } from "../../client";
 
 const PostCrypto = () => {
   const [posts, setPosts] = useState([]);
@@ -13,129 +14,108 @@ const PostCrypto = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchPosts = async () => {
       try {
-        const response = await fetch(
-          "https://lunarcrush.com/api4/public/topic/bitcoin/posts/v1",
-          {
-            headers: {
-              Authorization: "Bearer 9xj7on8tj5q0cqecn9gqvq2w75lrk4vgqrwwvx9cc",
-            },
-          }
-        );
+        setLoading(true);
+        const { data, error } = await supabase
+          .from("posts")
+          .select(
+            "id, created_at, title, content, created_by, hashtags, sentiment"
+          )
+          .order("created_at", { ascending: false })
+          .range((currentPage - 1) * 10, currentPage * 10 - 1);
 
-        if (!response.ok) {
-          throw new Error(`Error HTTP Status: ${response.status}`);
+        if (error) {
+          throw error;
         }
 
-        const data = await response.json();
         console.log(data);
-        setPosts(data.data);
+        setPosts(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error when getting data", error);
+        console.error("Error fetching posts:", error.message);
         setLoading(false);
       }
     };
-    fetchData();
-  }, []);
+
+    fetchPosts();
+  }, [currentPage]);
 
   useEffect(() => {
     document.title = "Hot Posts Crypto - Alvin AI";
   }, []);
+
+  // The function calculates the length and color of Progress based on the sentiment level
+  const calculateProgress = (sentiment) => {
+    let length = 0;
+    let color = "";
+    switch (sentiment) {
+      case 1:
+        length = 20;
+        color = "#f5222d"; // red
+        break;
+      case 2:
+        length = 40;
+        color = "#f5222d"; // red
+        break;
+      case 3:
+        length = 60;
+        color = "#f5222d"; // red
+        break;
+      case 4:
+        length = 80;
+        color = "#1890ff"; // blue
+        break;
+      case 5:
+        length = 100;
+        color = "#52c41a"; // green
+        break;
+      default:
+        length = 0;
+        color = "#000000"; // black (default)
+    }
+    return { length, color };
+  };
 
   return (
     <>
       <div className="blog">
         {loading ? (
           <>
-            <Skeleton
-              avatar={{ shape: "square", size: "large" }}
-              title={false}
-              paragraph={{
-                rows: 4,
-                width: ["100%", "80%", "60%", "40%"],
-              }}
-              active
-            />
-            <Skeleton
-              avatar={{ shape: "square", size: "large" }}
-              title={false}
-              paragraph={{
-                rows: 4,
-                width: ["100%", "80%", "60%", "40%"],
-              }}
-              active
-            />
-            <Skeleton
-              avatar={{ shape: "square", size: "large" }}
-              title={false}
-              paragraph={{
-                rows: 4,
-                width: ["100%", "80%", "60%", "40%"],
-              }}
-              active
-            />
-            <Skeleton
-              avatar={{ shape: "square", size: "large" }}
-              title={false}
-              paragraph={{
-                rows: 4,
-                width: ["100%", "80%", "60%", "40%"],
-              }}
-              active
-            />
-            <Skeleton
-              avatar={{ shape: "square", size: "large" }}
-              title={false}
-              paragraph={{
-                rows: 4,
-                width: ["100%", "80%", "60%", "40%"],
-              }}
-              active
-            />
-            <Skeleton
-              avatar={{ shape: "square", size: "large" }}
-              title={false}
-              paragraph={{
-                rows: 4,
-                width: ["100%", "80%", "60%", "40%"],
-              }}
-              active
-            />
+            {[...Array(6)].map((_, index) => (
+              <Skeleton
+                key={index}
+                avatar={{ shape: "square", size: "large" }}
+                title={false}
+                paragraph={{ rows: 4, width: ["100%", "80%", "60%", "40%"] }}
+                active
+              />
+            ))}
           </>
         ) : (
           <>
-            {posts
-              .slice((currentPage - 1) * 10, currentPage * 10)
-              .map((data) => (
-                <Link
-                  to={`/posts-crypto/${data.id}`}
-                  className="blog_box"
-                  key={data.id}
-                >
-                  {/* <div className="blog_box_head">
-                    <img
-                      src={data.creator_avatar}
-                      alt=""
-                      className="blog_box_head_imgs"
-                    />
-                  </div> */}
-
-                  <div className="blog_box_foot">
-                    <h2 className="blog_box_foot_h2">{data.post_title}</h2>
-                    <p>{data.creator_display_name}</p>
-                    <p>Followers: {data.creator_followers}</p>
-                    <p>Interactions (1h): {data.interactions_1h}</p>
-                    <p>Interactions (24h): {data.interactions_24h}</p>
-                    <p>Interactions (total): {data.interactions_total}</p>
-                    <button className="blog_box_foot_btn">
-                      Read on Mirror{" "}
-                      <i className="bx bx-outline icons_read"></i>
-                    </button>
-                  </div>
-                </Link>
-              ))}
+            {posts.map((post) => (
+              <Link
+                to={`/posts-crypto/${post.id}`}
+                className="blog_box"
+                key={post.id}
+              >
+                <div className="blog_box_foot">
+                  <h2 className="blog_box_foot_h2">{post.title}</h2>
+                  <p>{post.created_by}</p>
+                  <p className="posts_description">{post.content}</p>
+                  <p>{post.hashtags}</p>
+                  <p>Sentiment: {post.sentiment}</p>
+                  <Progress
+                    percent={calculateProgress(post.sentiment).length}
+                    status="active"
+                    // steps={5}
+                    strokeColor={calculateProgress(post.sentiment).color}
+                    strokeWidth={2}
+                  />
+                </div>
+              </Link>
+            ))}
           </>
         )}
       </div>
@@ -143,7 +123,7 @@ const PostCrypto = () => {
         <Pagination
           current={currentPage}
           total={posts.length}
-          pageSize={10}
+          pageSize={4}
           onChange={handlePageChange}
         />
       </div>

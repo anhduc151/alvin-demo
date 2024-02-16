@@ -11,6 +11,7 @@ const DashBoard = ({ token }) => {
   const [highVolumeCoins, setHighVolumeCoins] = useState([]);
   const [loading, setLoading] = useState(true);
   const { Search } = Input;
+  const [filteredCoins, setFilteredCoins] = useState([]);
 
   // let navigate = useNavigate();
 
@@ -56,6 +57,14 @@ const DashBoard = ({ token }) => {
     setSearch(e.target.value);
   };
 
+  const handleChangeTable = (e) => {
+    const searchText = e.target.value.toLowerCase();
+    const filteredData = coins.filter((coin) =>
+      coin.name.toLowerCase().includes(searchText)
+    );
+    setFilteredCoins(filteredData);
+  };
+
   // search coin
   const filterCoins = coins.filter((coin) =>
     coin.name.toLowerCase().includes(search.toLowerCase())
@@ -75,6 +84,11 @@ const DashBoard = ({ token }) => {
     {
       title: "Symbol",
       dataIndex: "symbol",
+      render: (text) => (
+        <span style={{ textTransform: "uppercase", fontWeight: "normal" }}>
+          {text.toUpperCase()}
+        </span>
+      ),
       key: "symbol",
     },
     {
@@ -256,9 +270,28 @@ const DashBoard = ({ token }) => {
       </div>
 
       <div className="dashboard_table">
-        <h2 className="dashboard_overview_h2">
-          <i className="bx bx-stats title_icons"></i> Coins
-        </h2>
+        <div className="dashboard_table_search">
+          <h2 className="dashboard_overview_h2">
+            <i className="bx bx-stats title_icons"></i> Coins
+          </h2>
+
+          {/* <input
+            type="text"
+            className="dashboard_table_search_input"
+            placeholder="Search coin name ..."
+            onChange={handleChangeTable}
+          ></input> */}
+
+          <div className="inputGroup">
+            <input
+              type="text"
+              required
+              autoComplete="off"
+              onChange={handleChangeTable}
+            />
+            <label htmlFor="name">Search</label>
+          </div>
+        </div>
 
         {loading ? (
           <>
@@ -286,7 +319,7 @@ const DashBoard = ({ token }) => {
           <>
             <Table
               columns={columns}
-              dataSource={filterCoins}
+              dataSource={filteredCoins.length > 0 ? filteredCoins : coins}
               rowKey={(record) => record.id}
               scroll={{ x: true }}
               pagination={{ position: "bottom", showSizeChanger: true }}

@@ -131,16 +131,18 @@ const Navbar = () => {
           </li>
         </Link>
 
-        {/* <Link to="/blog-list" className="decoration">
+        <Link to="/topics" className="decoration">
           {" "}
           <li
             className={`nav_links_li ${
-              activePage === "/blog-list" ? "active" : ""
+              activePage === "/topics" ? "active" : ""
             }`}
           >
-            Exchanges
+            Topics
           </li>
-        </Link> */}
+        </Link>
+
+
         <Link to="/posts-crypto" className="decoration">
           <li
             className={`nav_links_li ${

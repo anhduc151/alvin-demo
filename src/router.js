@@ -13,10 +13,11 @@ import BlogDetail from "./pages/Blog/DetailsBlog";
 import DashBoard from "./pages/Dashboard";
 import BlogLanding from "./pages/Landingpages/Blog-Landing";
 import Home from "./pages/Landingpages/Home";
-import PostDemo from "./pages/Landingpages/Post-Crypto";
 import NotFound from "./pages/NotFound";
 import PostCrypto from "./pages/Post";
 import DetailsPosts from "./pages/Post/DetailsPost";
+import Topics from "./pages/Topics";
+import TopicPosts from "./pages/Topics/Topics_Post";
 
 const RoutesApp = [
   { path: "/", component: Home, layout: null },
@@ -32,8 +33,9 @@ const RoutesApp = [
   { path: "/changepass", component: ChangePass, layout: null },
   { path: "/posts-crypto", component: PostCrypto },
   { path: "/posts-crypto/:id", component: DetailsPosts },
-  { path: "/post-crypto-demo", component: PostDemo, layout: null },
   { path: "/blogs", component: BlogLanding, layout: null },
+  { path: "/topics", component: Topics },
+  { path: "/topics/:topicId", component: TopicPosts },
 
   // Routes Admin
   { path: "/admin", component: LoginAdmin, layout: null },
