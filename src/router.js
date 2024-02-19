@@ -1,5 +1,7 @@
 import LoginAdmin from "./Admin/Login";
 import CreateBlog from "./Admin/pages/Create-Blog";
+import CreatePosts from "./Admin/pages/Create-Posts";
+import CreateTopics from "./Admin/pages/Create-Topics";
 import DashboardAdmin from "./Admin/pages/Dashboard-Admin";
 import ChangePass from "./Auth/ChangePass";
 import ForgotPassword from "./Auth/ForgotPass";
@@ -36,6 +38,8 @@ const RoutesApp = [
   { path: "/blogs", component: BlogLanding, layout: null },
   { path: "/topics", component: Topics },
   { path: "/topics/:topicId", component: TopicPosts },
+  { path: "/create-topics", component: CreateTopics, layout: null },
+  { path: "/create-posts", component: CreatePosts, layout: null },
 
   // Routes Admin
   { path: "/admin", component: LoginAdmin, layout: null },

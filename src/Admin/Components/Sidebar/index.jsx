@@ -84,35 +84,35 @@ const Sidebar = () => {
           </li>
         </Link>
 
-        {/* <Link to="/post-crypto-demo" className="decoration">
+        <Link to="/create-topics" className="decoration">
           <li
             className={`sidebar_li ${
-              activePage === "/post-crypto-demo" ? "sidebaractive" : ""
-            }`}
-          >
-            <i
-              className={`bx bx-trending-up sidebar_icons ${
-                activePage === "/" ? "iconActive" : ""
-              }`}
-            ></i>
-            News
-          </li>
-        </Link> */}
-
-        {/* <Link to="/blogs" className="decoration">
-          <li
-            className={`sidebar_li ${
-              activePage === "/blogs" ? "sidebaractive" : ""
+              activePage === "/create-topics" ? "sidebaractive" : ""
             }`}
           >
             <i
               className={`bx bx-line-chart-down sidebar_icons ${
-                activePage === "/" ? "iconActive" : ""
+                activePage === "/create-topics" ? "iconActive" : ""
               }`}
             ></i>
-            Topic
+            Topics
           </li>
-        </Link> */}
+        </Link>
+
+        <Link to="/create-posts" className="decoration">
+          <li
+            className={`sidebar_li ${
+              activePage === "/create-posts" ? "sidebaractive" : ""
+            }`}
+          >
+            <i
+              className={`bx bx-trending-up sidebar_icons ${
+                activePage === "/create-posts" ? "iconActive" : ""
+              }`}
+            ></i>
+            Posts
+          </li>
+        </Link>
       </ul>
 
       <div className="decoration sidebar_logout" onClick={handleLogout}>

@@ -4,7 +4,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./create.css";
 import { Link } from "react-router-dom";
-import { Pagination } from "antd";
+import { Skeleton, Pagination } from "antd";
 import Sidebar from "../../Components/Sidebar";
 
 const CreateBlog = () => {
@@ -14,6 +14,7 @@ const CreateBlog = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
 
   // handle panigation
   const postsPerPage = 6;
@@ -37,6 +38,7 @@ const CreateBlog = () => {
   // fetch data
   async function fetchPosts() {
     try {
+      setLoading(true);
       const { data, error } = await supabase
         .from("blogs")
         .select()
@@ -46,8 +48,10 @@ const CreateBlog = () => {
       } else {
         setPosts(data);
       }
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching posts:", error.message);
+      setLoading(false);
     }
   }
 
@@ -133,8 +137,9 @@ const CreateBlog = () => {
   }, []);
   return (
     <>
-    <Sidebar />
+      <Sidebar />
       <div className="create">
+        <h1 className="create_topics_h1">Create Blogs</h1>
         <div className="create_event">
           <p className="create_event_p">
             <i className="bx bx-stats title_icons"></i> Title
@@ -176,39 +181,50 @@ const CreateBlog = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          {currentPosts.map((product) => (
-            <div key={product.id} className="create_result">
-              <h3 className="create_result_h3">{product.title}</h3>
-              <p
-                dangerouslySetInnerHTML={{ __html: product.description }}
-                className="create_result_p"
-              />
+          {loading ? (
+            <Skeleton
+              // avatar={{ shape: "square", size: "large" }}
+              title={false}
+              paragraph={{ rows: 4, width: ["100%", "80%", "60%", "40%"] }}
+              active
+            />
+          ) : (
+            <div className="create_result_lists">
+              {currentPosts.map((product) => (
+                <div key={product.id} className="create_result">
+                  <h3 className="create_result_h3">{product.title}</h3>
+                  <p
+                    dangerouslySetInnerHTML={{ __html: product.description }}
+                    className="create_result_p"
+                  />
 
-              <div className="create_group">
-                <Link to={`/blog/${product.id} `}>
-                  <button className="create_view">View</button>
-                </Link>
-                <button
-                  onClick={() => {
-                    if (isEditing) {
-                      handleUpdate(product.id);
-                    } else {
-                      handleEdit(product.id);
-                    }
-                  }}
-                  className="create_edit"
-                >
-                  {isEditing ? "Update" : "Edit"}
-                </button>
-                <button
-                  onClick={() => handleDelete(product.id)}
-                  className="create_delete"
-                >
-                  Delete
-                </button>
-              </div>
+                  <div className="create_group">
+                    <Link to={`/blog/${product.id} `}>
+                      <button className="create_view">View</button>
+                    </Link>
+                    <button
+                      onClick={() => {
+                        if (isEditing) {
+                          handleUpdate(product.id);
+                        } else {
+                          handleEdit(product.id);
+                        }
+                      }}
+                      className="create_edit"
+                    >
+                      {isEditing ? "Update" : "Edit"}
+                    </button>
+                    <button
+                      onClick={() => handleDelete(product.id)}
+                      className="create_delete"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
 
         <div className="blogs_panigation">

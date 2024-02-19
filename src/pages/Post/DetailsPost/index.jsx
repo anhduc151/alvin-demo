@@ -68,7 +68,7 @@ const DetailsPosts = () => {
   };
 
   return (
-    <div>
+    <div className="details_posts">
       {loading ? (
         <Skeleton
           avatar={{ shape: "square", size: "large" }}
@@ -77,7 +77,7 @@ const DetailsPosts = () => {
           active
         />
       ) : post ? (
-        <div className="details_posts">
+        <div className="details_posts_lists">
           <h2 className="">{post.title}</h2>
           <p>{post.created_by}</p>
           <p className="">{post.content}</p>

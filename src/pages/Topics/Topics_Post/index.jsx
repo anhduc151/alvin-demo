@@ -1,15 +1,17 @@
-// Trang TopicsPost.js
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { supabase } from "../../../client";
+import { Skeleton } from "antd";
 
 const TopicsPost = () => {
   const { topicId } = useParams();
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTopicPosts = async () => {
       try {
+        setLoading(true);
         const { data: topicPosts, error: topicPostsError } = await supabase
           .from("topics_posts")
           .select("post_id")
@@ -29,11 +31,13 @@ const TopicsPost = () => {
         if (postsError) {
           throw postsError;
         }
-        
+
         console.log(postsData);
         setPosts(postsData);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching topic posts:", error.message);
+        setLoading(false);
       }
     };
 
@@ -43,14 +47,32 @@ const TopicsPost = () => {
   return (
     <div className="topics_posts">
       <h2 className="topics_posts_h2">Lists Posts</h2>
+      {loading ? (
+          <>
+            {[...Array(3)].map((_, index) => (
+              <Skeleton
+                key={index}
+                avatar={{ shape: "square", size: "large" }}
+                title={false}
+                paragraph={{ rows: 4, width: ["100%", "80%", "60%", "40%"] }}
+                active
+              />
+            ))}
+          </>
+        ) : (
       <div className="topics_posts_list">
         {posts.map((post) => (
-          <Link to={`/posts-crypto/${post.id}`} key={post.id} className="topics_posts_box">
+          <Link
+            to={`/posts-crypto/${post.id}`}
+            key={post.id}
+            className="topics_posts_box"
+          >
             <h3>{post.title}</h3>
             <p className="posts_description">{post.content}</p>
           </Link>
         ))}
       </div>
+        )}
     </div>
   );
 };
