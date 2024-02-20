@@ -1,159 +1,109 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import "../../Post/post.css";
-import { Pagination, Skeleton } from "antd";
-import FootLanDing from "../../../components/FootLanDing";
-import NavLanDing from "../../../components/NavLanding";
+import React, { useEffect, useState } from 'react';
+import NavLanDing from '../../../components/NavLanding';
+import FootLanDing from '../../../components/FootLanDing';
+import { supabase } from '../../../client';
+import { Pagination, Skeleton } from 'antd';
+import PostCrypto from '../../Post';
+import { Link } from 'react-router-dom';
 
-const PostDemo = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+const HotPosts = () => {
+  const [topics, setTopics] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [topicsPerPage] = useState(8);
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
+  // Change page
+  const handleChangePage = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchTopics = async () => {
       try {
-        const response = await fetch(
-          "https://lunarcrush.com/api4/public/topic/bitcoin/posts/v1",
-          {
-            headers: {
-              Authorization: "Bearer 9xj7on8tj5q0cqecn9gqvq2w75lrk4vgqrwwvx9cc",
-            },
-          }
-        );
+        setLoading(true);
+        const { data, error } = await supabase
+          .from("topics")
+          .select("id, name, created_at");
 
-        if (!response.ok) {
-          throw new Error(`Error HTTP Status: ${response.status}`);
+        if (error) {
+          throw error;
         }
 
-        const data = await response.json();
         console.log(data);
-        setPosts(data.data);
+        setTopics(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error when getting data", error);
+        console.error("Error fetching topics:", error.message);
         setLoading(false);
       }
     };
-    fetchData();
+
+    fetchTopics();
+    document.title = "Topics - Alvin AI";
   }, []);
 
-  useEffect(() => {
-    document.title = "Hot Posts Crypto - Alvin AI";
-  }, []);
+  // Logic to paginate
+  const indexOfLastTopic = currentPage * topicsPerPage;
+  const indexOfFirstTopic = indexOfLastTopic - topicsPerPage;
+  const currentTopics = topics.slice(indexOfFirstTopic, indexOfLastTopic);
 
   return (
-    <>
+    <div>
       <NavLanDing />
-      <div className="post_crypto">
-        {loading ? (
-          // <p>Loading ...</p>
-          <>
-            <Skeleton
-              avatar={{ shape: "square", size: "large" }}
-              title={false}
-              paragraph={{
-                rows: 4,
-                width: ["100%", "80%", "60%", "40%"],
-              }}
-              active
-            />
-            <Skeleton
-              avatar={{ shape: "square", size: "large" }}
-              title={false}
-              paragraph={{
-                rows: 4,
-                width: ["100%", "80%", "60%", "40%"],
-              }}
-              active
-            />
-            <Skeleton
-              avatar={{ shape: "square", size: "large" }}
-              title={false}
-              paragraph={{
-                rows: 4,
-                width: ["100%", "80%", "60%", "40%"],
-              }}
-              active
-            />
-            <Skeleton
-              avatar={{ shape: "square", size: "large" }}
-              title={false}
-              paragraph={{
-                rows: 4,
-                width: ["100%", "80%", "60%", "40%"],
-              }}
-              active
-            />
-            <Skeleton
-              avatar={{ shape: "square", size: "large" }}
-              title={false}
-              paragraph={{
-                rows: 4,
-                width: ["100%", "80%", "60%", "40%"],
-              }}
-              active
-            />
-            <Skeleton
-              avatar={{ shape: "square", size: "large" }}
-              title={false}
-              paragraph={{
-                rows: 4,
-                width: ["100%", "80%", "60%", "40%"],
-              }}
-              active
-            />
-          </>
-        ) : (
-          <>
-            {posts
-              .slice((currentPage - 1) * 10, currentPage * 10)
-              .map((data) => (
-                <Link
-                  to={`/posts-crypto/${data.id}`}
-                  className="blog_box"
-                  key={data.id}
-                >
-                  {/* <div className="blog_box_head">
-                    <img
-                      src={data.creator_avatar}
-                      alt=""
-                      className="blog_box_head_imgs"
-                    />
-                  </div> */}
+      <div className="discover">
+        <div className="discover_top">
+          <h2 className="discover_top_h2">
+            <i className="bx bx-coin-stack topics_icons"></i> Topics
+          </h2>
 
-                  <div className="blog_box_foot">
-                    <h2 className="blog_box_foot_h2">{data.post_title}</h2>
-                    <p>{data.creator_display_name}</p>
-                    <p>Followers: {data.creator_followers}</p>
-                    <p>Interactions (1h): {data.interactions_1h}</p>
-                    <p>Interactions (24h): {data.interactions_24h}</p>
-                    <p>Interactions (total): {data.interactions_total}</p>
-                    <button className="blog_box_foot_btn">
-                      Read on Mirror{" "}
-                      <i className="bx bx-outline icons_read"></i>
-                    </button>
-                  </div>
+          {loading ? (
+            <>
+              {[...Array(1)].map((_, index) => (
+                <Skeleton
+                  key={index}
+                  avatar={{ shape: "square", size: "large" }}
+                  title={false}
+                  paragraph={{ rows: 4, width: ["100%", "80%", "60%", "40%"] }}
+                  active
+                />
+              ))}
+            </>
+          ) : (
+            <div className="topics">
+              {currentTopics.map((topic, index) => (
+                <Link
+                  to={`/topics/${topic.id}`}
+                  key={index}
+                  className="topics_box"
+                >
+                  <h2 className="topics_box_h2">
+                    <i className="bx bx-coin topics_icons"></i> {topic.name}
+                  </h2>
+                  <p>Created at: {topic.created_at}</p>
                 </Link>
               ))}
-          </>
-        )}
-      </div>
-      <div className="blogs_panigation">
-        <Pagination
-          current={currentPage}
-          total={posts.length}
-          pageSize={10}
-          onChange={handlePageChange}
-        />
+            </div>
+          )}
+
+          <div className="blogs_panigation">
+            <Pagination
+              current={currentPage}
+              total={topics.length}
+              pageSize={topicsPerPage}
+              onChange={handleChangePage}
+              showSizeChanger={false}
+            />
+          </div>
+        </div>
+
+        <div className="discover_bottom">
+          <h2 className="discover_top_h2">
+            <i className="bx bx-coin-stack topics_icons"></i> Posts
+          </h2>
+          <PostCrypto />
+        </div>
       </div>
       <FootLanDing />
-    </>
+    </div>
   );
-};
+}
 
-export default PostDemo;
+export default HotPosts;

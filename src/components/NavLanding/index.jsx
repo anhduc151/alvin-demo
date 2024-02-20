@@ -83,10 +83,10 @@ const NavLanDing = () => {
           </li>
         </Link>
 
-        <Link to="/post-crypto-demo" className="decoration">
+        <Link to="/post-crypto" className="decoration">
           <li
             className={`navlanding_li ${
-              activePage === "/post-crypto-demo" ? "landingactive" : ""
+              activePage === "/post-crypto" ? "landingactive" : ""
             }`}
           >
             Hot Posts Crypto

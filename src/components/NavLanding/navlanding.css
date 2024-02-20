@@ -48,9 +48,9 @@
   align-items: center;
   border-radius: 10px;
   padding: 6px 20px;
-  background-color: #8044ff;
-  color: #ffffff;
-  border: 1px solid #3b3b3b;
+  background-color: rgba(48, 139, 71, 0.699);
+  color: rgb(21, 189, 111);
+  border: 1px solid rgba(7, 172, 48, 0.699);
 }
 
 .arr_icons {
@@ -59,7 +59,7 @@
 
 .navlanding_apps_btn:hover {
   cursor: pointer;
-  background-color: #6023e6;
+  background-color: rgba(33, 185, 71, 0.699);
 }
 
 .ant-message-notice-wrapper {
@@ -71,7 +71,7 @@
 }
 
 .landingactive {
-  color: #6c0dac;
+  color: rgb(21, 189, 111);
 }
 
 @media screen and (max-width: 768px) {
